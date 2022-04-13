@@ -1,0 +1,1452 @@
+Ecconia#4929: And here is the thing the sign belongs to. <[newline]> A counter for - well for what? To know what this thing is part of check out <#940181296074866698> (<https://discord.com/channels/401255675264761866/940181296074866698/962024467515715644>). It is not as mindblowing as I would like it to be - yet! <[newline]> This is an X/Y counter, it counts up/down X first and on overflow (with custom limits, not max word), it increments/decrements the Y counter. <[newline]> Takes just 2 ticks to update - could probably be 1 tick. And has a cool-down of 3 ticks. So the value may change every 6 ticks. For my use-case perfect!
+Ecconia#4929: Spooky label formatting 🙂 `<color=#0000>.........</color>` <[newline]> Oh even better with monospace!
+circuitgamer77#0377: I don't like stopping in the middle of music.
+circuitgamer77#0377: After I finish my current song :)
+circuitgamer77#0377: I might need help working through this one.
+circuitgamer77#0377: I don't know how to make it work...
+circuitgamer77#0377: And that's pretty much the hardest circuit to synchronize of any of these.
+circuitgamer77#0377: I just went back to my program counter to check timings, and I don't think it's actually working correctly...  I thought I fixed it, but apparently not?
+circuitgamer77#0377: I'm already planning to have a couple of read-only registers with fixed values, including 0, 1, and all 1s, so inverting is just a case of creating the pattern then XORing it with the all 1s register.
+circuitgamer77#0377: Got my fill circuit working, but only the positive one.  I'm thinking it might be better to just have inverting it take an extra cycle, but I don't know yet.  It's either one tick slower for every time that module needs to be used, or it requires an extra cycle to invert.  I don't know how often the inversion would need to be used relative to the non-inverted one, so I don't have the information to decide.
+circuitgamer77#0377: The one I didn't forget about is a bit filler - I want it to take two inputs which define the number of bits to fill in with 1s from each side.  A separate circuit will be for the inverted version (fills 0s and leaves 1s).
+circuitgamer77#0377: There's one that I didn't forget about, but I still feel like I forgot one.
+circuitgamer77#0377: I don't remember what other data processing circuit I meant to add...  I feel like I'm missing something.
+circuitgamer77#0377: I might try to replicate that for a network card at some point...  queues are very useful for buffering values while they are handled.
+Ecconia#4929: Finally a dedicated Queue module. <[newline]> It comes with a built-in constant-signal to pulse converter. <[newline]> You can change the input signal every tick. <[newline]> You can read the head of the queue every tick. <[newline]> Throughput: 6 ticks (when queue is empty for example) <[newline]> Read: 3 ticks <[newline]> Write: 5 ticks (2 ticks for the signal pulser) <[newline]> Queue max size is 16, but it already blocks at 13, but if you spam it, it uses the last 3 slots too. However one can just easily expand the whole thing. Increasing bit-width is more tedious though. <[newline]> If queue is blocking and input happens, a Singer makes some noise.
+circuitgamer77#0377: Tested a few basic values, but I don't want to test everything...  There's a lot!
+circuitgamer77#0377: Have not tested it yet.  It should be good, but testing will take a bit.
+circuitgamer77#0377: Could be a bit more compact, but I definitely don't want to redo this whole thing with a different circuit just for compactness.
+circuitgamer77#0377: I think this should be the final version :)
+binaryclock03#5762: Wow that looks to neat and tidy <3
+circuitgamer77#0377: And another quick layer:
+circuitgamer77#0377: This layer is now complete :)
+circuitgamer77#0377: I'm doing this in layers like a PCB :)
+circuitgamer77#0377: I think that's all the wiring done for the shifter!  I want to do a rewire of the control circuits, but it is functional now.
+circuitgamer77#0377: Arithmetic left shift complete - I just have arithmetic right to do, which is a bit more complicated to build, but not by much.  Should be pretty quick :)
+circuitgamer77#0377: Morning progress - logical left and right shift complete :)
+circuitgamer77#0377: Rotate left complete :)  I may still end up working on this more tonight, but I'm going to try not to.  It's almost 3:00 AM now...
+circuitgamer77#0377: a 16 bit rotate right is the same thing as a 16 bit rotate left, so I was able to remove a whole row from the last segment.
+circuitgamer77#0377: I'm probably going to go to bed soon...  it's 2:40 AM.  I want to finish left rotate first though.
+circuitgamer77#0377: Finished wiring right rotate...
+circuitgamer77#0377: these are the control lines:
+circuitgamer77#0377: added the control circuits:
+circuitgamer77#0377: This is going to be the size of the final shifter, minus a small amount of control circuitry on the side (bottom of the screenshot), and a little bit on top for arithmetic right.  I just have to do all the wiring, but it's a LOT of wiring!
+circuitgamer77#0377: Right on the right, left on the left.
+circuitgamer77#0377: 
+circuitgamer77#0377: I've worked out the circuits (in 4 bits rather than 32) for arithmetic left and right shift.  It requires more components than the other shifts and rotates, so I'm going to have to work out how to fit it in.  I think the right shift is the only one that needs more components, so I might be able to put that line on the top to give it room to expand.
+circuitgamer77#0377: I added a reset line to my stack :)
+Satan#9850: Very nice
+Ecconia#4929: 4KB. <[newline]> Just imagine the bottom part being stacked on itself, and there not being identically sized and functional replacements stacked on top of it. <[newline]> And the price of using modded components is: ~500 Bytes save-file addition per 256 Bytes ingame memory - fair. (not 0.7MB  per 256B - like the bottom unit) <[newline]> (Oh chip-select is still missing, each 256Bytes have their own select input).
+elblorenz32#4966: The Forbidden conversion
+BitorBit#6268: no worries bois, i managed to get float numbers into binary
+circuitgamer77#0377: I just realized that I forgot to design barrel shifters...  And I wanted to make a bit pattern circuit (I don't know if it has a name) - something that takes 2 inputs, and fills a set of bits with a certain number of 1s or 0s from each side based on those inputs.
+circuitgamer77#0377: Just thought through a preliminary ring system for my processor, even though I still haven't finished the basic design...
+circuitgamer77#0377: After some adjustment...
+circuitgamer77#0377: Typo in "instruction"...
+circuitgamer77#0377: I think this should work?
+circuitgamer77#0377: 64 possible registers?
+circuitgamer77#0377: I'm thinking 6, 6, 6, 14...
+circuitgamer77#0377: 5 bits per register would probably be the best, but that's not a nice number...  15 bits for registers, and 17 for opcode?
+circuitgamer77#0377: I guess it could be 3x 1 byte, for internal components (2 read 1 write), with the last byte for metadata, or maybe 3x 6 bit, with 14 bits for opcode and metadata?  I want to leave room for expansion, but I also want to have enough opcodes and metadata for feature expansion.  It's probably better to reduce the read/write size rather than the opcode size, but I want to make sure I can expand the number of registers as well.
+circuitgamer77#0377: I guess I need to start designing my instruction set now...
+circuitgamer77#0377: This is the hard bit with this CPU - the programmer has to know the internal timings of the CPU and program with that in mind, because the different components work at different speeds, which makes it possible for data to still be being processed when its destination is read from, which means that instruction would read old data.  It also makes it possible to write to a register from two places at once, which corrupts the data (although a clever programmer might be able to use that to do an instant OR operation on data being received from other components, even though it technically isn't intended).
+circuitgamer77#0377: Most of my CPU is designed now, just in pieces all over the place...  I think the only thing that's missing is the control unit and the bus bank (there's a lot of busses needed), and possibly an indirect addressing mode (but that's for later).
+circuitgamer77#0377: (can't push and pop in the same tick, but I think it can push and read in the same tick)
+circuitgamer77#0377: Yes, of course.
+Erikbot#6368: Is is pipelined so that things can be read/written in the same tick? (with some delay)
+circuitgamer77#0377: Forgot to mention - it has overflow/underflow indicators/protection - if it tries to overflow or underflow it outputs an error signal and doesn't allow any further under/overflow to happen.
+circuitgamer77#0377: 
+circuitgamer77#0377: Made a compacted version of it.  Still one tick slower, but usable.  Currently 4 bit storage, but it's really easy to extend the data.
+circuitgamer77#0377: It could be 1 tick faster, but it would be unreliable.  If I did that and read the tick after a push, it would return the wrong data
+circuitgamer77#0377: Both kinds of read - peek and pop.
+circuitgamer77#0377: Read is 2 ticks rather than 1.
+circuitgamer77#0377: I think this is slightly slower, but it does work:
+circuitgamer77#0377: I'm designing this whole system around being as fast as possible (in-game - not counting lag), so if I can't get anything to work as fast as this I'm going to stick with this version.  If there's two models that are the same speed, I'll use the more lag optimized version :)
+circuitgamer77#0377: 
+circuitgamer77#0377: I'll try it.  For now, I just tested this model, and it does in fact work as intended :)
+Ecconia#4929: If one builds it cleverly maybe? Idk
+circuitgamer77#0377: I'll try that - is it still equivalently fast?
+Ecconia#4929: Does not have to be laggy, if you use an additional bit to mark the head on the memory, which you use for accessing it fast. <[newline]> Only that bit needs to be shifted then. <[newline]> (still dedicated stack hardware, but almost no shifting)
+circuitgamer77#0377: there, internal signals added :)
+circuitgamer77#0377: I should add some internal signals to communicate when to shift the value internally, rather than just from the side as it is right now.
+circuitgamer77#0377: 4 bits wide, but can easily be extended.
+circuitgamer77#0377: Untested, but this should be a stack memory module that can push or pop every 1 tick, with a 1 tick lag (so read the top value one tick late if you want the next tick to have the next bit of data).  Will be laggy due to the number of updates, but I haven't worked out a fast address based stack yet.
+blane1257#8086: 👀
+Ecconia#4929: Nice thought, but given the amount of client and server sided bugs, no can do. <[newline]> Like if I do not restart my client every now and then my OS freezes, cause RAM is full. <[newline]> And the server breaks internally, where sometimes it just puts wires back and other weird stuffs. <[newline]> So restarts must happen on both sides - daily - if not more often.
+GHXX#9078: or just never leave the world
+Ecconia#4929: Oh noes, just duplicating this increases the save file by 0.7MB... I definitely need a modded component for exactly this thing.
+Ecconia#4929: I plan to make one unit 256 slots. <[newline]> Each unit will have something like a "chip select". So their decoders and IO won't trigger. <[newline]> So 1 unit, so 256 slots. Is the maximum. But that depends on what you want ofc. <[newline]> (If that was the question)
+Erikbot#6368: how does component update count scale with increased amount of memory?
+Ecconia#4929: I think that should be quite low-cost on the LW's mem usage. But I aim for 256 slots with this thing (so 8 units). <[newline]> And then I gonna make a modded component, with the same capabilities as this, to then get even more ingame-memory, for even less RAM usage.
+Ecconia#4929: I heard its trendy these days to show off memory. <[newline]> Here we got a low-component count simple memory. <[newline]> This is a 32-slot 8-bit memory. Saving and writing is - how do you even measure that? 3 ticks? <[newline]> Has an output and an input bus (separation was not intended, but that way its smallest). <[newline]> Can read and write simultaneously. <[newline]> Less than 2 square wide per slot. (So it won't get too long). <[newline]> Per 32 slots: 2 boards + 26 pegs + 8 pegs. <[newline]> Per 2 slots: 1 board. <[newline]> Per slot: 10 AND gates + 8 D-Latches.
+circuitgamer77#0377: (the interface board for the 3x model just took the second address and directed it to both decoders, so the third decoder was just unneeded circuitry for my uses)
+circuitgamer77#0377: just made a smaller version - the previous design (and the one I had on my slower model) can handle 3 different addresses for read1, read2, and write, but I only need one address for both read2 and write, so I removed the third decoder.  That reduced the width to 5 tiles, which is the same as the other design, although it still is gigantic.  Speed is still the same, just slightly reduced functionality.
+circuitgamer77#0377: Faster but much, much bigger RAM module.  1 tick address decode rather than 2 tick.  The decoding portion is 3 times longer and 8 tiles wide rather than 5 though.  Much, much bigger.  Slightly taller too...
+BitorBit#6268: ok
+Ecconia#4929: Nah, making dinner in kitchen, so in 15mins
+BitorBit#6268: could you join now?
+BitorBit#6268: ok
+BitorBit#6268: here
+Ecconia#4929: Delete that. Bruh. Don't put that here. It's not part of the big plan. <[newline]> My display my rules. Make it on your own server. <[newline]>  <[newline]> Thanks <@873714386848587786>, I want to keep these parts of my project in my dedicated channel, So either link the channel. Or ask first. <[newline]> (We can talk about it later in voice chat) <[newline]>  <[newline]> Asked him to remove a recording of my display which is capable of drawing straight lines within a tick. But that's a spoiler of my project.
+DarkTiger#8892: 60x32 screen test
+DarkTiger#8892: https://www.youtube.com/watch?v=68ZH4UzgY34
+Luckybuilder#6131: Connect 4 but need to fix a few things
+Luckybuilder#6131: 
+Tixo_Moments#3697: oh
+Tixo_Moments#3697: this button goes to the top
+PseudoGoose#2841: it's also pretty similar to the classic redstone decoder design
+PseudoGoose#2841: "back in my daay..."
+PseudoGoose#2841: this is the way that I made them in TUNG (the predecessor of Logic World, mainly only had inverters and buffers)
+PseudoGoose#2841: yep!
+Tixo_Moments#3697: is that a decoder in the bottom left? never seen that design I love it
+Jimmy#8080: gorgeous
+PseudoGoose#2841: 
+PseudoGoose#2841: me: _oops all right angles_
+Dragon Lord#6944: ditto :)
+Jimmy#8080: I love the geometric patterns formed by wires in this game
+elblorenz32#4966: art...
+blane1257#8086: ohhhh i see, i misread, i thought they meant the 65th character code, not literally the 65th character sent
+circuitgamer77#0377: Try Markdown in LW next?  (mostly joking)
+zandy#3110: Yeah, I'm doing both!
+BitorBit#6268: working on it............
+Erikbot#6368: a newline character would shift it in advance instead of after a certain number of characters
+blane1257#8086: sounds like thats what theyre doing ^
+blane1257#8086: > I'm working on a mechanism that will shift all the contents up a line when you send it the 65th character automatically
+Erikbot#6368: you should add a "newline" character that always shifts the contents up.
+zandy#3110: Working on a terminal. You can send it a byte and it will render the correct character (I say "correct" - I'm using my own charset, not ASCII). I'm working on a mechanism that will shift all the contents up a line when you send it the 65th character automatically
+circuitgamer77#0377: I have a History midterm project that I have zero interest in, and can't find the answers that I need in the resources the professor gave, so I needed a break...
+circuitgamer77#0377: I'm not sure if I'm planning to use the base pointer part of the stack - that's just in to remind me to consider it later.
+circuitgamer77#0377: I'm mainly working on a different assignment for college, so I haven't been very active recently, but I spent a few minutes working out how a local/global scope mode switcher would work in a CPU.  What do you think so far?  (this is very low effort - I just wanted a break from schoolwork)
+GUMMYCAT#6001: moved the forwarding unit to the decode stage,  added logic to make sure your forwarding the latest data, should only be maybe 3-4 ticks in all.  not sure if this can be improved
+GUMMYCAT#6001: thinking about adding a forwarding unit in the decode stage aswell to allow branching to be calculated one step earlier
+GUMMYCAT#6001: i think the hardware was the issue, so i completely rebuilt it
+PseudoGoose#2841: you might be able to do it in 5? i just wanted to try out dadda, which has lower gate count
+PseudoGoose#2841: thanks terminology
+PseudoGoose#2841: i actually learned this general technique as "reduction of summands"
+PseudoGoose#2841: oh i guess it is related to wallace trees, if that's what you mean
+PseudoGoose#2841: > _dadda multiplier_
+Verlio_H#0201: cant you do 32 bit tree adder in 5 stages not six?
+Verlio_H#0201: is tree multiplier?
+PseudoGoose#2841: https://en.wikipedia.org/wiki/Dadda_multiplier
+Cero#0516: multiple cores?
+Cero#0516: Lol what is that, and why is there so many full adders
+PseudoGoose#2841: 
+PseudoGoose#2841: i think it would make more sense to build a 16 bit one, and then use it to do 32 bit iteratively
+PseudoGoose#2841: re <#401255675264761868> dadda multiplier
+GUMMYCAT#6001: little mini version, gonna debug at this scale and see what i can figure out
+GUMMYCAT#6001: i never looked up how to pipeline a multiplier, its asyncronous, and i stall and wait for the calculation to finish before continuing
+Erikbot#6368: I made mine syncronus.
+Erikbot#6368: is your multiplier pipelined?
+GUMMYCAT#6001: regardless of how i messed up the algorithm, in "hardware: or software, im curious as to what im rendering.
+GUMMYCAT#6001: i made a special third multiplication instruction that cuts out the right area of the 32 bit output and returns that instead of high or low, i could do shifting and oring, but did this for the speed, as the multiplier is quite slow
+Erikbot#6368: is your multiplier producing the higher and lower bits as separate instructions?
+GUMMYCAT#6001: ive made a mandlebrot renderer, both cpu and gpu. im not 100% sure its software thats not working right
+Erikbot#6368: did you try and implement it in a programming language so that you have something to compare with?
+GUMMYCAT#6001: yes
+Erikbot#6368: the length squared right?
+GUMMYCAT#6001: >=4
+GUMMYCAT#6001: branch at 4
+GUMMYCAT#6001: true, im trying to keep speed high, and [8:8] allows for less instructions overall
+Erikbot#6368: *assuming you branch when a number is high enough
+Erikbot#6368: and if you do that, you can just use the higher bits of a multiplication and shift them down.
+Erikbot#6368: you should use something closer to [2:14], since numbers above 2 don't matter.
+GUMMYCAT#6001: using fixed point [8:8]
+DADp#7461: good 😤
+GUMMYCAT#6001: center of screen is also 0,0
+Erikbot#6368: yes, it is a thing
+DADp#7461: squint your eyes
+DADp#7461: its smth
+GUMMYCAT#6001: ok, i fully rendered this and its not a mandlebrot, but what is this?  no idea what im seeing
+Jimmy#8080: These screenshots look like a series of modernist paintings haha
+GUMMYCAT#6001: so much time, and nothing. looks round and continuous atleast
+GUMMYCAT#6001: dont know if this is better or not
+GUMMYCAT#6001: my mandlebrot looks a bit off. hmmm
+LOOPS#1372: Fireballs and boulders for the arcade game I'm working on
+circuitgamer77#0377: I don't know what you mean, can you rephrase for me?
+circuitgamer77#0377: All of that control board has now been reduced to this, and the systems for testing have been removed and are now external boards.
+circuitgamer77#0377: I had designed it with a testing board attached to the front, but then designed the control board around that testing setup.
+circuitgamer77#0377: Here's the system with IO and the last two flags connected.
+circuitgamer77#0377: My current ALU design has a control board longer than the actual ALU...  I should probably redesign it.
+circuitgamer77#0377: Has a bit of timing adjustment - the input three busses are at different timings, but take the same control signal timing.
+circuitgamer77#0377: New register design - 1 tick slower max write time, but required to select between input busses to write from.  2 outputs, 3 inputs.  3 tick write, 0 tick read.
+Saltypretzel#0321: it was hilarious
+Saltypretzel#0321: my favorite was his wood plank blower
+Nik#1011: I think Matthias Wandel has a video on his "Matthias random stuff" channel
+Nik#1011: I don't think it's so people watch it again... he watches to see which one catches attention better. he's made a video about it and others have too, I've seen some people ramble about it and the thought process
+Cero#0516: yeah I watched that and felt the same way. Not only that, but he changes the title + picture to make people watch it again
+Ecconia#4929: Damn clickbait. <[newline]> So, good video. But totally wrong title. <[newline]> I expected: How to in general change computing for the better. <[newline]> What I got: How to improve Neural Network calculations to use less power and be faster. <[newline]> Bruh.
+Cero#0516: My chunk-to-regular adapter
+Cero#0516: Stackable/tileable 4 bits of mem
+jackson535#1361: pretty sic
+Cero#0516: Also just realized that it was a stupid housing
+Cero#0516: 
+Cero#0516: Ah, yeah I think I have a form of that going on rn
+jackson535#1361: I made a shift register with d latches but I think anyone can figure out that design in <5 minutes
+jackson535#1361: oh idk
+Cero#0516: Anyways, see any good register designs?
+jackson535#1361: haeh
+Cero#0516: I keep trying to use it sort-of
+Cero#0516: I mean the fact it's *not* in this game
+Cero#0516: Lol no, I understood and used them
+jackson535#1361: pistons/qc were reliable and excellent tools
+jackson535#1361: pretty sure that just means you didn't understand it's rules
+Cero#0516: Quasi connectivity is basically ptsd at this point
+Cero#0516: I gotta unprogram the mc stuff in my head.
+jackson535#1361: probably cero
+jackson535#1361: one set for the delay to the next step, the other for how long the note stays active during that step
+Cero#0516: We all come from mc don't we...
+jackson535#1361: which works like this, but instead of repeaters between noteblocks it's 2 sets of 4 bit levers next to each singer
+jackson535#1361: what you see is 16 loop step/timing controllers all with 2 16 step singer modules
+jackson535#1361: the actual playlist rom isn't made yet but that's not that hard
+jackson535#1361: thank
+Reese4221#8317: that looks amazing
+jackson535#1361: singers
+Erikbot#6368: In analog computers, yes.
+Saltypretzel#0321: I mean isn’t relu an ideal diode
+BitorBit#6268: already watched them
+circuitgamer77#0377: I would reccomend 3B1B's videos as a reference
+BitorBit#6268: i already watched a ton
+BitorBit#6268: its not a single video
+Erikbot#6368: the video does not give you enough information to reproduce it, you need an activation function between the layers.
+circuitgamer77#0377: I'm guessing RNN because it's one of the simplest\.
+BitorBit#6268: this
+BitorBit#6268: https://www.youtube.com/watch?v=GVsUOuSjvcg
+circuitgamer77#0377: I don't know what "regular" is
+circuitgamer77#0377: I'm guessing you'll be doing an RNN, but that's just a guess.
+BitorBit#6268: regular
+circuitgamer77#0377: But what model?  There are quite a few different designs for them.
+BitorBit#6268: (for test)
+BitorBit#6268: curently with one neuron
+circuitgamer77#0377: ?
+circuitgamer77#0377: What kind of neural network are you making
+BitorBit#6268: to make it as fastest posible
+BitorBit#6268: that is the plan
+BitorBit#6268: yes
+circuitgamer77#0377: That's going to be gigantic, but good luck :)  It will definetly be faster than 1 multiplier for everything.
+BitorBit#6268: first i need to make a neuron
+BitorBit#6268: 1 per neuron
+circuitgamer77#0377: Are you planning on doing everything with 1 multiplier, or are you going to make one per neuron, or something else?
+BitorBit#6268: even 4 bits is a LOTT
+BitorBit#6268: ey
+circuitgamer77#0377: I agree you will probably need more than 4 bits, but maybe you'll be able to get it to work...
+BitorBit#6268: ik
+Erikbot#6368: also you would need a mechanism of modifying the weights, which is expensive to say the least.
+circuitgamer77#0377: So you're using strengths from 0 to 3, with 0.25 as the interval?  (16 options)
+BitorBit#6268: yes
+Erikbot#6368: you need to do a series of matrix transformations, and you would have to modify the weights, and also this type of network would not fit well.
+BitorBit#6268: its 4
+Erikbot#6368: 2 bits is not enough variability in signal strength between nodes.
+BitorBit#6268: test 1 would be to recognise squares
+BitorBit#6268: with neural network
+BitorBit#6268: trying to make digital ai
+Erikbot#6368: You are not giving enough information on what you want to do, and the information you have given is contradictory.
+BitorBit#6268: need to do ``A1*B1+A2*B2....``
+BitorBit#6268: 8x8 screen
+BitorBit#6268: how not
+Erikbot#6368: no
+BitorBit#6268: so it would take ~384ticks to calculate
+BitorBit#6268: gud
+Erikbot#6368: you can do that in 3 ticks with just a single adder
+BitorBit#6268: i have 2 bits for regular numbers and 2 other bits for 0.N
+Erikbot#6368: also it is not possible to represent both 0.2 and 2 in 2 bits.
+Erikbot#6368: in 1 tick
+Erikbot#6368: A LUT can do literally any operation
+BitorBit#6268: or 0.5*2
+BitorBit#6268: can it do 0.2*2?
+Erikbot#6368: use a LUT
+BitorBit#6268: (4 bit)
+BitorBit#6268: does anyone has fast multiplier
+Reese4221#8317: i cant wait to see the progress :)
+Reese4221#8317: thats pretty cooool
+jackson535#1361: wip ultra supercomputer 8kb ram 14 core raytracing ai
+LOOPS#1372: Bobby runner version v 0.1
+Ecconia#4929: After many many hours and much help from <@!873714386848587786>, I was able to finish the 80 symbols for my font... AHHH <[newline]> Details (as always) in: <#940181296074866698>
+HuntaBadday#3556: 85 * 170 = 14450 <[newline]> 101 0101 * 1010 1010 = 11 1000 0111 0010
+HuntaBadday#3556: Ight, how about multiplication?
+Ecconia#4929: You have a display? You need font! <[newline]> My font, created in and for LogicWorld. <[newline]> (Details here: <#940181296074866698>) <[newline]> Not sure if it is complete enough for my use-case. <[newline]> Have to assign numbers to each letter "next". And think about how to implement the drawing. <[newline]> (I could draw an A in 2 ticks. Cause straight lines are super cheap to draw (1 tick))
+BitorBit#6268: questions
+BitorBit#6268: 8 bit ALU
+BitorBit#6268: bit shifting is ez
+HuntaBadday#3556: My CPU does bit shifting!
+Ecconia#4929: I consider this discussion pointless. I admit though, that I suck at statistics, so I don't know which makes more sense in general. <[newline]> But I know that it does not matter at all if the simulation does not use 100% CPU. And I recognize situations where AND or relays make more sense than the other. <[newline]> In general relays and the link layer are not a big problem if the graph they operate on is small. If however the graph gets too big, one should consider to split it using non instant components. <[newline]> But no clue where the line of this tradeoff is. <[newline]> At some point it is cheaper for the CPU to calculate an AND gate and an additional tick, than processing the link layer. But no clue where this point is.
+circuitgamer77#0377: It's slightly faster to calculate, but it has to do it multiple times
+circuitgamer77#0377: Yes, but if you use and gates it has to do the same thing, but across multiple ticks, which makes it slower even if you push the sim to it's limit.
+PseudoGoose#2841: in a single tick
+PseudoGoose#2841: the problem is if you chain a bunch of relays via their instant inputs, then the simulation (as it is currently implemented) has to manually propagate a signal across all of them one by one
+circuitgamer77#0377: But if you use and gates it takes an extra tick, which is a 100% slowdown.
+Ecconia#4929: 30% slower than normal components (including And gates)
+circuitgamer77#0377: It would be nice to have that proven experimentally though.
+circuitgamer77#0377: We've talked about this before - even with relays taking longer like they do, they're still faster because the 30% slowdown is still faster than the 100% slowdown of an and gate.  Unless everything is perfectly pipelined, it's way faster to use relays than and gates.
+LOOPS#1372: Ah I see, thanks, I figured that must've been the case
+Erikbot#6368: but sometimes not.
+Erikbot#6368: relays are harder to simulate.
+Erikbot#6368: sure, but you have to remember that the simulation is run inside a computer. For large scales or high tick rates you have to consider how quickly your computer is able to run the simulation, and what can make it faster.
+LOOPS#1372: I am a bit confused why relays are worse than and gates? I was under the impression that relays are better because they use less ticks?
+Ecconia#4929: Yeah, but do not reply to me, but the person who wrote the question. (I will read this channel anyway). <[newline]> So that we know where the answer belongs to.
+BitorBit#6268: (multiplication is made from a software)
+BitorBit#6268: the infinitly exstandable full adder/substractor that has shift option builded in it
+Ecconia#4929: Now nobody knows what you are referring to. <[newline]> Reply to the message or put an answer with more words, so that we know what you are trying to tell us 🙂
+BitorBit#6268: yes
+Vinyl Boot Maven of Shade#1858: On average the relays were around 30% faster.
+Vinyl Boot Maven of Shade#1858: oh also 32 bit.
+Vinyl Boot Maven of Shade#1858: For a 5 stage barrel shifter the and gate performance varied more with as much as half the speed in every once in a while.
+Erikbot#6368: by how much?
+Vinyl Boot Maven of Shade#1858: Yea. I did a simple little experiment myself. Individually the and gates are faster for sure.
+Erikbot#6368: while they aren't added to the queue, what the link layer does to propagate signals is quite unclear, so this would have to be experimentally tested, although in the case of a barrel shifter it is probably faster.  However,in the case of the serial circuit above, the number of component updates would not change if the relays where replaced by and gates.
+Vinyl Boot Maven of Shade#1858: Realtime. Given the signal propagation of and gates, 2 barrel shifters running under the same clock, relays perform a bit faster because the and gates have increasingly more queued updates as more stages are added.
+Erikbot#6368: do you mean latency or realtime simulation performance?
+Vinyl Boot Maven of Shade#1858: In certain setups relays can perform better than and gates. In particular, a staged barrel shifter.
+BitorBit#6268: it is proparly designed
+Erikbot#6368: not if it is properly designed
+BitorBit#6268: 1 is less compact
+Erikbot#6368: 4 is more than 1
+BitorBit#6268: nah, its the fastest with that
+Erikbot#6368: you will have to rephrase that.
+BitorBit#6268: they cancel the output lag
+BitorBit#6268: nah dud
+Erikbot#6368: even though they are inputs, the performance is still impacted.
+BitorBit#6268: those are inputs
+BitorBit#6268: i am going 4 tick per bit
+BitorBit#6268: i am not going 1 tick per bit
+Erikbot#6368: these are not and gates and the delay is not 1 tick per bit.
+BitorBit#6268: i already have that
+Erikbot#6368: every relay in the circuit can be replaced with an and gate and the data should be put in 1 tick shift registers.
+BitorBit#6268: i dont understand
+Erikbot#6368: relays and fast buffers are processed in a different way making them inefficient compared to standard gates.
+BitorBit#6268: ?
+Erikbot#6368: you don't need the link layer for this
+BitorBit#6268: what do you think about my 8 bit adder/substractor
+BitorBit#6268: ey
+Erikbot#6368: modified population count where carry propagation is delayed until the final module. it is now 12 tick sync.
+Dragon Lord#6944: "one of them processes in parallel so it's faster"
+Reese4221#8317: ok
+BitorBit#6268: output is parallel, input is still serial
+Reese4221#8317: the first is parallel?
+BitorBit#6268: both of them are serial, both use serial inputs/outputs
+Reese4221#8317: yours is serial
+BitorBit#6268: did you noticed any diffrence?
+BitorBit#6268: MY 8bit adder
+BitorBit#6268: your 8 bit adder
+BitorBit#6268: hmmm
+Ecconia#4929: More details as always here: <#940181296074866698> <[newline]> (Server public, but needs my mod, details here: <#905378240338726942>)
+Ecconia#4929: And the display is real! At least the arrowed part, the rest is a functionally same modded component with 32² pixels. <[newline]> (Small bug in it, it is one tick off in some situations, weird - gonna fix that tomorrow).
+Ecconia#4929: Progress of today, got the display hooked and am designing a font.
+BitorBit#6268: does someone has fast counter
+LOOPS#1372: Tree multiplier
+Erikbot#6368: iterative or a tree multiplier?
+BitorBit#6268: gud
+LOOPS#1372: No division
+LOOPS#1372: It has a dedicated multiplier yes
+BitorBit#6268: and devide?
+BitorBit#6268: can it multiply?
+LOOPS#1372: Test program works perfectly <:dab:446109373849141258> . Computer all contained on 1 board
+BitorBit#6268: does someone has fast counter
+Prime#8883: quantum ban of proposals of quantum oracle bogorom: every possible punishment is determined all at once, and the probability of escape decreases every time a quantum bogorom idea is proposed, as doing so is giving a definition to, and a precise explanation of, the state of that which is quantum.
+InCrIpTiOn#8028: quantum bogo serial oracle: self explanatory
+blane1257#8086: quantum quantum bogorom: there is one word of rom, which is a superposition of all possible states <[newline]>  <[newline]> every possible output is calculated simultaniously, and the wave function will always collapse to the correct output
+PseudoGoose#2841: a win-win if you ask me
+Verlio_H#0201: I like those odds
+CrispyPin#1149: quantum bogorom: you run the program with one word of random rom, if it doesn't produce the right output you destroy the universe
+PseudoGoose#2841: maybe group the oracles by byte if you're feeling nice
+PseudoGoose#2841: bogorom
+PseudoGoose#2841: well the idea is, to program it, you need to strobe the oracles until they display the right value
+CrispyPin#1149: you only need one word
+PseudoGoose#2841: imagine a much larger ROM just made of oracles
+PseudoGoose#2841: hah i like that
+Erikbot#6368: 8 bit read only memory
+Erikbot#6368: impressive
+LOOPS#1372: Not to be outdone
+Erikbot#6368: I also made such a design a while ago if you want to take a look at it: https://discord.com/channels/401255675264761866/930935059886784532/938859519562362900
+LOOPS#1372: 1 bit addressable ram, might make it bigger later
+Ecconia#4929: Just a small note, I have a thread for this project: <#940181296074866698>
+Ecconia#4929: I switched decoder designs from a chunky non-AND gate one. <[newline]> It looks like so much better now, and the layout is so slick. <[newline]> And Memory size went from 2.6 to 1.7 👍
+Erikbot#6368: 1 tick conditional: bitwise invert, absolute value (2s complement), negative absolute value (2s complement). control lines arrive the same tick as the data
+BitorBit#6268: to get to 8kb, it would need ~64mb on disc
+BitorBit#6268: 0.128kb <[newline]> kilobytes
+Erikbot#6368: and the current amount of storage is?
+BitorBit#6268: 1mb
+Erikbot#6368: each time you write, you have at least 70 000 active components if you build linear ram for your max size.
+Erikbot#6368: what is your world size (in MB)?
+IDoget#3748: the fact this is what 8.192 kb looks like in logic world kinda makes me inpressed at how SMALL we are making TB of storage
+BitorBit#6268: the GIGA storage (~22k components) <[newline]> size:  <[newline]>       min: 0.128KB <[newline]>       max: 8.192KB <[newline]>  <[newline]> speed: 5 ticks (30TPS: 0.1666s to Read/Write) <[newline]>  <[newline]> purpose: store data/instructions/messages,  be additional cache
+BitorBit#6268: cache l1 <[newline]>  <[newline]> 4 addresses <[newline]> 32 bits (4bytes) <[newline]> 3 tick (30TPS: 0.1s to Read/Write) <[newline]>  <[newline]> (preforms very well) <[newline]> purpose: be an cache l1
+Erikbot#6368: early planning on a ALU that will perform iterative multiplication in 2\*n ticks, iterative division in 3\*n ticks, and max/min/add/sub/compare etc in 3 ticks. putting everything inside a single ALU allows me to significantly reduce component count which will improve performance.
+PseudoGoose#2841: cause I like to organize my wires
+PseudoGoose#2841: in all of those cases, there is a shared peg in between the gate and the buffer
+PseudoGoose#2841: Yes, I could connect stuff directly to gate outputs but they're not for neatness sake
+PseudoGoose#2841: You mean the fast buffers?
+Erikbot#6368: the output part of logic gates act as diodes, so many of your buffers seem unnecessary.
+PseudoGoose#2841: this decodes all the common reg/reg and reg/imm ALU instructions
+PseudoGoose#2841: [RISCV] the start of instruction decoding, two major opcodes done!
+Ecconia#4929: "Wires"
+BitorBit#6268: my 8x8 display (60TPS)
+Erikbot#6368: ~~how to i compile to logic world~~
+IDoget#3748: here is rule 30 if you want to make that too.  <[newline]>  <[newline]> ```c++ <[newline]> #include <stdint.h> <[newline]> #include <iostream> <[newline]> int main() { <[newline]>   uint64_t state = 1u << 31; <[newline]>   for (int i=0 ; i<32 ; ++i) { <[newline]>     for (int j=64 ; j-- ;) { <[newline]>       std::cout << char(state >> j & 1 ? '1' : '-'); <[newline]>     } <[newline]>     std::cout << '\n'; <[newline]>     state = (state >> 1) ^ (state | state << 1); <[newline]>   } <[newline]> } <[newline]> ```
+BitorBit#6268: i did
+Erikbot#6368: rule 110, did you not read my message?
+BitorBit#6268: of patterns
+BitorBit#6268: what type
+Erikbot#6368: does anyone have any cool starting patterns I should try?
+Erikbot#6368: rule 110 is surprisingly easy to optimize.
+ierdna100#9840: Yeah that too, But I meant a compiler from whatever ISA to encoded keypresses for Logic World
+Erikbot#6368: but typically you can use a custom assembler to translate similar assembly into the machine code for the computer.
+Erikbot#6368: If you build a pre existing ISA you don't even need to make a custom compiler.
+ierdna100#9840: Wow, this is quite useful, especially for programming a computer. Are there any plans for that? A full on compiler that is?
+BitorBit#6268: 260 TPS (for people that doesnt trust me or want to see)
+BitorBit#6268: only problem is, its limited by own code, there isnt much diference from 60 and 500 tps from code typing speed(cant press multiple keys at once) <[newline]>  <[newline]> (FIXED)
+BitorBit#6268: programmer what i made(30 TPS)
+BitorBit#6268: 
+BitorBit#6268: already made
+DanielGJ44#4557: I do not have such a build but I'm sure someone may
+BitorBit#6268: do you have a clock checker <[newline]>  <[newline]> thing that is checking if clock is changeing, if it was changeing and spopped it will send a signal
+BitorBit#6268: yes
+DanielGJ44#4557: Good
+BitorBit#6268: it already stopped
+DanielGJ44#4557: I don't like where this is going
+BitorBit#6268: no
+nemerod#0256: if we make the correction it's for you BitorBit to everyone
+BitorBit#6268: i use words like i want them to use for me
+Vinyl Boot Maven of Shade#1858: Well, if your fine with it, that's cool. But people will get salty if you use byte and bit interchangeably.
+nemerod#0256: we trying explain the right word you need use 🙂 <[newline]> if you want, we trying but if you no want understand, everyone cant understand your build and content 😦
+BitorBit#6268: most of people doesnt understand me
+nemerod#0256: byte it's 00000000 to 11111111
+BitorBit#6268: you dont need to say
+BitorBit#6268: ik
+nemerod#0256: bit it's 0 or 1
+nemerod#0256: no man 😦
+BitorBit#6268: for me byte and bit are the same, i use bits but says bytes
+nemerod#0256: `byte` NOT_EQUAL `bit`
+Vinyl Boot Maven of Shade#1858: Just to say, yea ^^. kb is universally understood as kilobyte.
+nemerod#0256: write Kbit 😉
+BitorBit#6268: its 8kb
+BitorBit#6268: its 8kb
+Vinyl Boot Maven of Shade#1858: Ok, nice!
+nemerod#0256: thank vinyl
+BitorBit#6268: yes
+Vinyl Boot Maven of Shade#1858: 1 mega bit would be 1,000,000 bits.
+BitorBit#6268: yes
+Vinyl Boot Maven of Shade#1858: OH yea, it is 1 kilobit.
+BitorBit#6268: 
+nemerod#0256: too late
+nemerod#0256: no
+BitorBit#6268: sec
+BitorBit#6268: so by doing {2*((16*16)*16)} you get its 8KB
+nemerod#0256: so, 1.024 Kilo bit
+nemerod#0256: you have 0.001 mega bit
+BitorBit#6268: its 256 bit
+nemerod#0256: and it's not 1 Mega bit too
+BitorBit#6268: sec i said wrong
+nemerod#0256: write the right syntax 🙂
+Vinyl Boot Maven of Shade#1858: Oh so it's 1 mega bit of data.
+nemerod#0256: me and <@!377717131556552708> (sorry for the ping) <[newline]> we say same thing
+BitorBit#6268: and there are 2 of them
+BitorBit#6268: bit adress
+BitorBit#6268: its expanded to 64 bits
+nemerod#0256: 16 line * 4 column * with 16 bit data <[newline]> converted to MegaByte <[newline]>  <[newline]> 16\*4\*16=1024 bit <[newline]> 1024 / 8 = 128 byte
+BitorBit#6268: its 16 bits(expandable)
+Vinyl Boot Maven of Shade#1858: Are there some hiding? I count 16X4 16 bit
+BitorBit#6268: 
+BitorBit#6268: its not fake
+BitorBit#6268: (i also typed wrong, its kb)
+BitorBit#6268: 1024 is 1MB
+Vinyl Boot Maven of Shade#1858: ? I'm counting 128 bytes in the "1BM" one.
+nemerod#0256: fake
+BitorBit#6268: 8KB OF DATA! (it takes 20 sec to copy 4MB)
+BitorBit#6268: 4KB of DATA!
+BitorBit#6268: megabytes
+Vinyl Boot Maven of Shade#1858: What's a BM?
+BitorBit#6268: 2KB of data
+BitorBit#6268: 1kb of data
+BitorBit#6268: fixed clock <[newline]>  <[newline]> max clock speed: 3 ticks(changable bits)
+Ecconia#4929: What is a splitter? What should it do? <[newline]> Provide some examples 🙂 (Might join voice chat to explain) <[newline]> => [Yes, he means a BCD to 7-Seg decoder]
+BitorBit#6268: how does splitter work
+Ecconia#4929: This does not exist in LW.
+Ecconia#4929: But what do you mean with splitter?
+BitorBit#6268: i am createing that, so i would need a splitter to finish it
+Ecconia#4929: Do you mean a BCD to 7-Segment decoder? (these can be very small)
+Ecconia#4929: Since we* do not have bundled-wires in logic world, there is no such thing as a splitter (as you showed before). <[newline]> What do you mean? <[newline]> ||we* = our Logic World||
+Ecconia#4929: A bit smaller should still be possible. But also heavily depends on required bit-amount.
+BitorBit#6268: it is, i just need splitter
+ierdna100#9840: *I dont think its possible to build much smaller*
+BitorBit#6268: yes, but much smaller
+Ecconia#4929: Something like this? https://discord.com/channels/401255675264761866/401255675264761868/907254062616023100
+BitorBit#6268: building something similar to this so i can debug errors in processor
+BitorBit#6268: i need splitter for this
+Ecconia#4929: Might also merge it, but certainly not a gate. Since it has backflow.
+Erikbot#6368: no, it splits the signal
+BitorBit#6268: that is or gate
+Erikbot#6368: 
+BitorBit#6268: i need a splitter design
+Erikbot#6368: look in builds, I made it work
+BitorBit#6268: 
+Erikbot#6368: maybe
+InCrIpTiOn#8028: what about two inputs?
+InCrIpTiOn#8028: true
+Erikbot#6368: with my standards for reduced part count it is not possible, and therefore it would not be viable
+Erikbot#6368: It is easily possible but part count would be too high
+InCrIpTiOn#8028: if youre gonna tile it
+InCrIpTiOn#8028: it has to be impossible
+Flampt#3906: mhm
+Limón#7879: 256 bit color
+Erikbot#6368: which I will now attempt
+Erikbot#6368: but fitting it will would be a challenge
+Erikbot#6368: actually 3 works
+Erikbot#6368: but hard
+Erikbot#6368: 2 bit color is still possible
+Sekoia#3968: well a 1x1 has to be single bit
+Erikbot#6368: (but 1 bit color)
+Erikbot#6368: the second ones are actually 1x1
+Sekoia#3968: oh wait is each pixel more than 1x1?
+Sekoia#3968: how is it so small?
+Sekoia#3968: oh daaaaang
+cheese3660#8641: Damnn
+Erikbot#6368: triple read, triple write, 32 instant registers, with ability to mark and check the validity of registers.
+Prime#8883: It has a top bus that gets optionally overridden and replaced by the bottom "shift bus" for each shift block
+Prime#8883: Much more compact
+Prime#8883: V2 <@!358990534619955200>
+Prime#8883: I'd need a mux for each module, because I need them to either pull off the main bus, or pull off another module. Unless you mean to make it a multi-cycle operation, in which case, that seems rather slow.
+Prime#8883: It's a good idea, but the current setup won't work with that, so I'll have to rework how each output gets handled
+Erikbot#6368: it looks like 8 bit, so you want up to a 7 bit shift which can be done with 3 bit shifting modules: one that shifts 1 step, then 2 steps then 4 steps. Enabling and disabling these modules will make it possible for you to perform arbitrary bit shifts within the 7 bit window.
+Prime#8883: Sorry, I never specified. It is a bit shifter
+Erikbot#6368: which is the same as the module that has 4x4 pixels, which makes sense since it has a similar part count
+Erikbot#6368: this used about 5.5 MB btw
+Erikbot#6368: my screen module looks so ridiculous
+Erikbot#6368: a higher pixel density should at least make it possible for you to be closer to the screen
+Ecconia#4929: No clue, I only have a hunch, that its related with how far the display is away from the world origin.
+Erikbot#6368: cause this screen has pixels that are 1x1
+Erikbot#6368: <@!151293812675706880> would your z fighting with screens be fixed if each pixel was 1x1?
+Erikbot#6368: putting it into a 8x8 matrix produces a 128x128 screen
+Erikbot#6368: 16x16 screen module with 1 bit color where each pixel is 1x1. there are only 2 pegs in the entire module, so this is close to the lowest possible part count.
+Dragon Lord#6944: looks like a bit shifter or maybe the start of a multiplier
+Erikbot#6368: this module has 8x8 pixels with 2 bit color and each pixel is 2x2
+Erikbot#6368: what is the purpose of this circuit?
+Prime#8883: It would be faster if I had used a hard-wired 3-bit 1:8 demux instead of a series of stacked 1-bit 1:2 demuxes. I attempted to do that, but it was an absolute mess. Either way, it's an abomination against circuit-kind.
+Prime#8883: May or may not elect to just start over
+Prime#8883: Still need to add the inverter for shifts in the opposite direction
+Prime#8883: I regret this.
+cheese3660#8641: True, I use the modded display because I dont find my fun in the game by making displays and such, I wouldn't make a cpu component myself
+Flampt#3906: <:weirdsip:886246488072650772>
+Erikbot#6368: I AM PERFECTLY AWARE THAT MODDED SCREENS EXIST
+Flampt#3906: Looks nice
+Flampt#3906: https://discord.com/channels/401255675264761866/901195561980543007/942056662993371136
+Erikbot#6368: the point of the game is to create circuits, I might as well just add a "CPU" component.
+Flampt#3906: hexas memory mod, it makes one panel 256x256
+Erikbot#6368: do you mean a mod that has an entire screen?
+Flampt#3906: Use the mod that makes it better
+Erikbot#6368: (pixels are very big to reduce part count)
+Erikbot#6368: main problem right now is that each pixel is 4x4 so it is gigantic.
+Erikbot#6368: 128x128 only uses about 5-6 MB
+Erikbot#6368: this is more of a test to see if low component big screens are possible
+cheese3660#8641: oof
+Erikbot#6368: yes
+cheese3660#8641: monochrome?
+Erikbot#6368: the x decoder is missing
+Erikbot#6368: xy decoder with input data sent on the y axis
+Flampt#3906: How do you turn on each pixel?
+Erikbot#6368: 64x64 screen with extremely low part count.
+Ecconia#4929: Its logic webs
+Ecconia#4929: Found this awesome wire-stuff in <@!358990534619955200>s world.
+Erikbot#6368: Also in the time one number has been divided, the cpu I'm building would have executed 30 instructions (3 tick clock), even with the fast divider.
+Erikbot#6368: ram being bigger than the entire computer is generally not unexpected
+Erikbot#6368: as mentioned, the algorithm can be significantly ram optimized, but it still requires O(n) memory.
+LOOPS#1372: Building wise 8192 bytes of ram would be pretty horrible. Would probably be larger than the rest of the computer combined
+Erikbot#6368: guessing and checking is viable for small numbers.
+Erikbot#6368: guessing and checking is close to the fastest way to figure out the factors of a number, however, finding primes is WAY faster with a prime sieve. for every number we check with a "guess and check" we would have to test every single previous prime, making the algorithm O(n^2), however a prime sieve removes numbers, which can be done in very quickly per number, making a prime sieve O(n log log n).
+LOOPS#1372: In that case wouldn't prime detection by checking division remainder be slower but more practical? I saw you made a pretty sweet divider earlier
+Erikbot#6368: by the way, prime sieves are so efficient that you get megabytes of prime numbers very quickly.
+Erikbot#6368: this calculation is wrong, you need 8192 bytes in an unoptimized prime sieve to get up to 65536 numbers.
+PseudoGoose#2841: you can do that entirely with add and mult (technically squaring)
+PseudoGoose#2841: you should do mandelbrot!
+LOOPS#1372: Okay neat, thanks for the help!
+Erikbot#6368: there are optimizations for it, for example, we don't need to store the multiples of 2, meaning the ram usage can be reduced even more.
+Erikbot#6368: yes
+LOOPS#1372: Oh no kidding, I'll have to look into that later. Is that via the Eratosthenes sieve?
+Erikbot#6368: for small numbers you could fit everything into registers
+Erikbot#6368: if you have bit manipulation instructions (or use lots of bit shifts), you only need one bit/upper bound for the number, so 16 bytes of ram is enough to find primes up to 65536.
+LOOPS#1372: Program counter, PROM, RAM and some rudimentary GPU stuff
+LOOPS#1372: I cant even imagine the how much ram that would require required for that🥲
+Erikbot#6368: what's left to do?
+Erikbot#6368: even something like finding primes can done efficiently with a prime sieve (if you have ram or get REALLY creative with your registers), without a multiplier
+Erikbot#6368: I really like the layout
+LOOPS#1372: It is 16-bit
+Erikbot#6368: is it 8 bit?
+LOOPS#1372: I know, that's why I want something more difficult, something that makes use of the multiplier
+Erikbot#6368: you don't need a multiplier to do collatz, it is faster to do bit shift + add
+LOOPS#1372: Ohh very cool, that I can certainly do with this computer
+Jimmy#8080: Triangular numbers, hexagonal numbers, etc
+Jimmy#8080: Oooh, you could make it calculate polygonal numbers
+LOOPS#1372: Maybe, that'd be sweet to pull off. Might have to design a whole computer around that alone lol seems very complex
+Jimmy#8080: Hm, could you make it search for prime numbers?
+Jimmy#8080: Collatz is a good one
+LOOPS#1372: Work in progress computer I'm close to finishing. Simultaneous multiplication, addition, subtraction, shift left & right, conditionals. Ought to capable of stuff like collatz and many other sequences. What would be something interesting (and challenging) to program this for?
+Jimmy#8080: Yo I love this, so glad we added obj export
+Prime#8883: e
+Erikbot#6368: 
+CrispyPin#1149: *also programmer socks
+Ecconia#4929: The statements do not make any assumption about females. <[newline]> Merely men vs real men.
+Erikbot#6368: implying that women don't have a fast computation kink?
+Satan#9850: What men want: sex <[newline]> What ***Real *** men want: Fast computation
+Dragon Lord#6944: Dang, that's some fast computation 😩
+ThePiGuy24#0369: 0,0 at inf zoom
+CrispyPin#1149: looks nice
+CrispyPin#1149: what coordinates is this rendering?
+Ecconia#4929: Love the pattern, unexpectly clean
+Erikbot#6368: Mandelbrot set rendered in 0 ticks without any logic gates.
+Erikbot#6368: the way it works is that I subtract the (bit shifted) divisor and check if the result was negative, so this design requires conditionally changing the sign of the input numbers, but that can also be done in 3 ticks so it isn't much of an issue.
+Erikbot#6368: this is to implement the "M" extension
+Erikbot#6368: the circuit on the left is equivalent to the circuit on the right.
+Erikbot#6368: Iterative integer divider module, fully pipelined, 3 ticks/iteration. Hopefully I will be able to divide 3 pairs of numbers at once if I perfect the timings.
+BitorBit#6268: oh
+Erikbot#6368: The ALU is in the centre
+Erikbot#6368: Above the rendered image is explanatory text. I don't appreciate your language.
+GHXX#9078: 100%
+ThaCuber#5611: how big is that screen :bruh:
+Ecconia#4929: Lets remove physics and moving parts, but get these graphics instead. A deal I would take without a second thought <[newline]> (Post 1.0)
+GHXX#9078: we NEED this kind of shading in LW 😢
+BitorBit#6268: i dont see the alu here
+BitorBit#6268: looks like a random logic that seems smart at the same time kinda tall and dum
+BitorBit#6268: what is that
+Erikbot#6368: 
+Erikbot#6368: risc-v cpu (base isa) with every data line and part is 32 blocks wide (excluding control signals). The clock will be slow and program/working memory is split to that there will be no data hazards (I will probably try to pipeline it later). Now I just have to program the control lines.
+Ecconia#4929: Ahh :D Harsh
+IDoget#3748: so now i got to make it betteer
+IDoget#3748: and then another mf said "now i wanna do that"\
+IDoget#3748: but i said something about it
+IDoget#3748: working on something now that has not been done
+BitorBit#6268: are both of my displays good?
+Ecconia#4929: Heh even before Logic World release in the beta, displays have already been built :) <[newline]> And we will never stop to build displays!!!!
+Ecconia#4929: Sad moment :( <[newline]> But yeah I relate much. <[newline]> Try to do something so weird, that it has not been done before. Or collaborations?
+IDoget#3748: who knows... the server seems to all work on similar projects if you talk about what your doing. <[newline]>  <[newline]> I stopped talking about my stuff until i finish it because i know someone is going to come along and just do it better before im even done with mine. kinda demotivates me
+circuitgamer77#0377: I guess a lot of people have gotten some kind of processor working, so a logical next step could be IO...
+ThePiGuy24#0369: humans are notoriously visual creatures, its only natural ;p
+CrispyPin#1149: imagine
+BitorBit#6268: why is everyone building displays? <[newline]>  <[newline]> is it because i started it?
+VigilanteHobo#1873: performance alu slice
+Verlio_H#0201: rip syntac hi
+Erikbot#6368: here it is
+Erikbot#6368: (I had raymarching and raytracing in the same script)
+Erikbot#6368: my current code has a lot of other stuff in it, I will clean it up a bit and then send it.
+gnog#2259: i use software multiplication, that's why it's so slow
+gnog#2259: no, i did not
+Erikbot#6368: did you implement the "M" extension?
+gnog#2259: can i please get it when you come home
+Erikbot#6368: I have one that renders ascii with fixed point, but I'm on my phone right now.
+TheWildJarvi《THE SEMI SEER》#1337: https://youtu.be/E52PiRjJS1Y
+TheWildJarvi《THE SEMI SEER》#1337: this may be useful also
+TheWildJarvi《THE SEMI SEER》#1337: i used 1+10.21 format
+gnog#2259: oh thanks, let me see
+TheWildJarvi《THE SEMI SEER》#1337: https://github.com/TheWildJarvi/JarviBrot
+TheWildJarvi《THE SEMI SEER》#1337: i can send hardware schems that you can convert into code
+gnog#2259: never done that
+gnog#2259: i gotta check the fixed point thing
+gnog#2259: okay
+TheWildJarvi《THE SEMI SEER》#1337: gives enough precision and range for zoom and pan
+TheWildJarvi《THE SEMI SEER》#1337: use 1+11.20 fixed point
+gnog#2259: yes
+TheWildJarvi《THE SEMI SEER》#1337: 32 bits?
+TheWildJarvi《THE SEMI SEER》#1337: you need to define a fixed point format using integers
+gnog#2259: i can't find any proper mandelbrot program in C that only works with integers, maybe you have one?
+TheWildJarvi《THE SEMI SEER》#1337: ayy its getting there
+gnog#2259: i was running mandelbrot program for 2 hours and thought that something is going wrong... but no, the cpu is producing shit as intended!
+circuitgamer77#0377: oops, I answered that as me - I didn't notice it was your ping.  Sorry!
+CrispyPin#1149: idk, i made multiple with different levels of functionality
+Erikbot#6368: Here is a smaller design I just made, that I think fits your requirements. It is double buffered, and one tick pipelineable. With correct addressing circuitry it runs in O(sqrt(n)) component updates.
+circuitgamer77#0377: I've done that for RAM and ALU testing, just because there's a lot more bits on the input, but I can keep an eye on the overall pattern rather than checking the specific output.
+circuitgamer77#0377: It would work, I just don't want to take the time to do that.
+gl0ck#6489: fair
+circuitgamer77#0377: The issue is that I need to know the exact state of the input while it's running the test, and I don't feel like making a whole second circuit to manage that.
+gl0ck#6489: <:rcon_really:707629694643732490>
+gl0ck#6489: that's what counters are for
+circuitgamer77#0377: It's not an extreme floating point error, it just let me resize it too far.
+circuitgamer77#0377: I don't think this is quite right...
+circuitgamer77#0377: The single buffer one with no address decoding was smaller, but this one is the one I want to work with - double buffered with addressing.
+Erikbot#6368: ~~make each component it's own module~~
+Erikbot#6368: <@!316553438186045441> was your 4x4 screen module smaller than this?
+circuitgamer77#0377: I kind of want to make the display even more modular - have the display be a module, the addressing be a module, and each buffer be it's own module.
+circuitgamer77#0377: Because I want it to be 1x1 :)  (I'm trying to start with high resolution so the displays could be replaced with larger color displays if needed)
+Ecconia#4929: Due to component count issues, you won't make it that big anyway.
+Ecconia#4929: 1x1 pixel size, with buffering is tough. Why not 2x2?
+circuitgamer77#0377: This one:
+circuitgamer77#0377: I'm already running into space problems with my first double buffered display...  Any other ideas ?  :)
+Ecconia#4929: Make it even longer, so that you can put all D-Latches in one row, more space for wires 😛 <[newline]> (Horrible, but works I guess....)
+circuitgamer77#0377: Do you have any tricks for fitting more data lines into a small area?  The biggest problem I keep running into with displays is wire count.
+Ecconia#4929: Its a passive mod, only changes the building behavior on demand. So you can delete it anytime without issues 🙂 So not much of maintaining for this one at least.
+circuitgamer77#0377: I'm probably not going to try the mod, just because I don't really feel like maintaining mods, but it's good to know that it exists.
+circuitgamer77#0377: Ok
+Ecconia#4929: I have not yet looked into how sockets work. So I do not know.
+circuitgamer77#0377: Made a very simple bitmap display - write to a pixel by turning on the x and y line for it with the data on the data line.  Tileable to any size.  I'm going to make a much better version later with more image buffers and maybe a read capability.  The problem I keep running into is not having enough space for all of the data lines...
+circuitgamer77#0377: Do sockets work if they're clipping into each other?
+Ecconia#4929: Did you see that I made a mod, which allows you to place even if the game does not want you to? <[newline]> I made it exactly for these kind of situations. Does not fix the floating point issues. But lets you continue building at least. <[newline]> (Toggleable it is)
+TheWildJarvi《THE SEMI SEER》#1337: ooo gotchya
+circuitgamer77#0377: I've been trying to keep each pixel 1x1, because if I want more colors I can replace just the front part with four 2x2 displays or 1 4x4 display (or some other weird arrangement), and connect the same 16 wires to each one.
+TheWildJarvi《THE SEMI SEER》#1337: yea my b
+circuitgamer77#0377: Got it
+circuitgamer77#0377: Ok, so one pixel is bigger than 1 tile in your version?
+TheWildJarvi《THE SEMI SEER》#1337: could be 2x2 area for a pixel for 2 color
+TheWildJarvi《THE SEMI SEER》#1337: 1px x 1px can vary on actual dimensions in game depending on color
+TheWildJarvi《THE SEMI SEER》#1337: till i get to the width i want
+circuitgamer77#0377: How do you fit the latches there?  A latch is bigger than 1x1.
+TheWildJarvi《THE SEMI SEER》#1337: then keep doubling it
+TheWildJarvi《THE SEMI SEER》#1337: oh i start as a 1px x 1px module
+circuitgamer77#0377: So is each slice made out of individual subsections, or is one slice always a full side length?
+TheWildJarvi《THE SEMI SEER》#1337: and i dont really use sockets
+TheWildJarvi《THE SEMI SEER》#1337: oh i gotchya, i guess i build differently. I do it as a 1D slice, then stack it vertical for my final display
+circuitgamer77#0377: Currently my modules are 4 pixels by 4 pixels, which is 4x4 tiles (each pixel is 1x1), but I'm not sure if making larger modules would be better or worse for compactness.
+TheWildJarvi《THE SEMI SEER》#1337: im not sure what you mean by that tbh
+circuitgamer77#0377: I might try to make another display that uses x/y/z lines and a data line, so that I can offload even more logic to the sides rather than in every module...
+circuitgamer77#0377: Do you think it could end up more compact if you work with 8x8 modules rather than 4x4?  I've been trying to figure out if that would end up more compact or less compact.
+TheWildJarvi《THE SEMI SEER》#1337: yeah, i think youd still need a global command to tell it to push the frame because you wouldnt want it to do it per pixel lol, that would defeat the point haha
+circuitgamer77#0377: Maybe there's a fancy way to swap individual buffers to the read/write areas...  Same idea, but without visual cycling.
+circuitgamer77#0377: I like that idea :)  You could tweak it to work with more frame buffers as well, but you would have to cycle through all of them to get to one.
+TheWildJarvi《THE SEMI SEER》#1337: i was gunna keep it a secret (; but ill lyk. basically just put 2 d latches in series. no need to worry about addressing. you always write to the last one and the first one is always displayed
+circuitgamer77#0377: I need to make a different version anyway to enable writing to the currently displayed buffer and readback from either buffer.
+circuitgamer77#0377: I might also try it
+circuitgamer77#0377: What do you think you can do?
+circuitgamer77#0377: Its only taking about half a second to clone 8 modules of this so far, so I'm not too worried :)
+TheWildJarvi《THE SEMI SEER》#1337: i think i have a smart way to do a double buffer without needing fancy addressing schemes. time to launch the game lol
+circuitgamer77#0377: Ah, that explains it :)  I haven't done anything with modding yet, just because I don't feel like maintaining mods through updates.  It might, I guess.
+TheWildJarvi《THE SEMI SEER》#1337: hes a user here who made a mod that speeds up the game load times
+circuitgamer77#0377: yes
+TheWildJarvi《THE SEMI SEER》#1337: gnog?
+circuitgamer77#0377: or term
+circuitgamer77#0377: I don't know that acronym
+TheWildJarvi《THE SEMI SEER》#1337: im curious if gnogs improvement allows you to stack it larger without freezing.
+circuitgamer77#0377: I fixed it.  I haven't tested every possible input combination, just because I don't feel like manually inputting 32 inputs and flying back and forth to check each one :)
+circuitgamer77#0377: ?
+TheWildJarvi《THE SEMI SEER》#1337: is this with you using gnogs improvement?
+circuitgamer77#0377: Yep, that was it.  Time to try to fit a fast buffer in somewhere...
+circuitgamer77#0377: Something is wrong with my addressing system...  I'm wondering if it's writing to every module that matches one of the two addresses, instead of the module that matches both.
+circuitgamer77#0377: Well, that's not quite right...
+circuitgamer77#0377: 
+circuitgamer77#0377: Got it to fit in this case, just had to run a longer wire than expected...  Time to re-copy all this and start testing again.
+TheWildJarvi《THE SEMI SEER》#1337: Would probably need a different shape or something so users don't think it's a bugged out normal peg
+TheWildJarvi《THE SEMI SEER》#1337: Yea I agree. I would love a constant true peg
+circuitgamer77#0377: This is where a constantly-on peg would be helpful...  At the moment I either need an inverter or a switch to supply it.
+circuitgamer77#0377: Testing was a good idea - I made a critical change on the manual addressing version, but I forgot to make it on the automatic addressing version.  The only problem is I don't know how to fit it.  There is pretty much no space left, so I'm going to have to do some shuffling...  The first screenshot is the broken one, and the second is the correct one.  I need either two inverters or an inverter and a buffer, and I don't know where to add that second component.
+circuitgamer77#0377: 
+circuitgamer77#0377: There, got it modified to work with 6 extensions :)  I'm only testing with a 4x4 modules for now, but I should be able to test it with a bigger display if I want to.
+circuitgamer77#0377: Got it modified for 2 extensions...  Maybe I can modify it more to force it to work, but I think this is enough for testing.  It's 4 modules tall, assuming there aren't other errors when I stack them, which is 16 pixels.
+circuitgamer77#0377: One bit extension is equivalent to 3 bit addressing, because each module is 4x4 pixels, which has 2 bits of addressing built in.
+circuitgamer77#0377: I can do one bit extension addressing on the Y address while testing, but not any bigger because the modules start clipping.  The X axis is fine though.
+circuitgamer77#0377: They are the part that's far enough from the root that it generates errors.
+circuitgamer77#0377: The addressing is expandable to any number of bits, to allow for as large a display as required.
+Erikbot#6368: modular adressing?
+Erikbot#6368: unfortunately you will have to make the modules larger.
+circuitgamer77#0377: It's the fact that I have to have modular addressing modules that causes the problem.
+circuitgamer77#0377: I have 16 pixels per board, and the entire point of this design is to make it modular.
+Erikbot#6368: merge pixels into large single boards.
+circuitgamer77#0377: Wait - I found a possible workaround, but I don't know if it will work in every case.
+circuitgamer77#0377: I'm trying to test my display, but I'm running into floating point errors again...  I don't have any way to get around this.  Normally if I'm running into floating point errors I just attach it slightly differently or remove the clipping component and hardwiring around it, but in this case the part that's clipping is close to the root part and I can't remove it or move it without removing the whole assembly.  Guess I have to wait until 0.91 to test it...
+GHXX#9078: read-write finally works. Just gotta extend it to a full 256bytes and add a smart read cache for very fast read access
+Ecconia#4929: When light goes down like a straight laser beam 😄
+Erikbot#6368: 
+Stefan#5422: Make a led matrix
+Erikbot#6368: (but without the three 2 bit decoders)
+Erikbot#6368: this is the equivalent 3d circuit.
+Erikbot#6368: in real life a scales, 3-4d might be the optimal
+Erikbot#6368: for logic world, somewhere around 2-3d might be the sweet spot depending on the number of cells
+Erikbot#6368: this "small support logic" makes it bad to do a higher dimension design when the number of cells is low
+Erikbot#6368: lets say you want to build ram with 4096 cells where each cell is a byte (4kb in total). ``` <[newline]> In a _d design you would have _ component updates (excluding small support logic): <[newline]> 1 -> 4096*k <[newline]> 2 -> 64*k <[newline]> 3 -> 16*k <[newline]> 4 -> 8*k <[newline]> 5 -> 5.278*k```
+Reese4221#8317: how efficient?
+Erikbot#6368: This can be used to make extremely server efficient ram.
+Erikbot#6368: 3d adresser projected to 2d, constructed with two 2d adressers. This design uses O(n^(1/3)) component updates. this shows it is possible to project an adresser to a lower dimension, thereby making it possible to build 4d adressers in 3d.
+circuitgamer77#0377: I am running into a few floating point errors, but hopefully they will stay away long enough to allow for decent testing.
+circuitgamer77#0377: Nope, that one was fine.  I think this is complete!  Testing will be done tomorrow - I'm going to have trouble waking up for class...
+circuitgamer77#0377: I had made a minor error - I had the buffer A read line connected to Data.  Just one wire, and it's fixed now :)  There might be one more error I need to check given that, but it would also be very easy if I made that mistake too.
+circuitgamer77#0377: The blue is on the side only, and the smaller line beside it is the actual display component, which is 4x4 pixels in 4x4 tiles.
+circuitgamer77#0377: Both versions are complete (but not tested) - the close one has significantly fewer components, but is manual addressing (use the switches to set the cluster addresses), and the far one is automatic addressing (it figures out what its address should be based on the neighboring clusters).  Both are interchangeable and expandable, so there is no theoretical max size of the display.  Still need to test it though...  The grid on the front could be fairly easily modified to be less displays with more colors, which I might make later.
+circuitgamer77#0377: I'm trying to keep it a bit compact, but I'm not putting much effort into compactness - mostly just compacting if I happen to notice a way to compact.
+circuitgamer77#0377: Now onto the Y control board.
+circuitgamer77#0377: The dark blue boards are for addressing (just a buffer for timing), and all addressing is bit tileable, so the display can be as big as you would like.
+circuitgamer77#0377: X control circuitry finished (the blue boards), attached to a single display module (4x4 pixels).  This is for my double buffered display.
+BitorBit#6268: 128x256
+BitorBit#6268: 
+BitorBit#6268: still the same
+BitorBit#6268: no wait
+BitorBit#6268: what if i juse sernet for X input and Y is regular
+BitorBit#6268: sec
+TheWildJarvi《THE SEMI SEER》#1337: most hw is designed around outputting a single x,y value at a time
+BitorBit#6268: wait a sec
+TheWildJarvi《THE SEMI SEER》#1337: thats the issue i mean
+BitorBit#6268: i need to be able to load multiple paralels
+BitorBit#6268: and than i still have another problem
+BitorBit#6268: yes
+TheWildJarvi《THE SEMI SEER》#1337: and render several pixels at once
+TheWildJarvi《THE SEMI SEER》#1337: you can use several decoders in parallel
+TheWildJarvi《THE SEMI SEER》#1337: idk how to help you lower the amount of input bits other than use a decoder
+BitorBit#6268: and it needs a lot of pins what i dont want
+BitorBit#6268: yes
+TheWildJarvi《THE SEMI SEER》#1337: is this for some dedicated unit?
+TheWildJarvi《THE SEMI SEER》#1337: hmm gotchya
+BitorBit#6268: its X^N,Y
+TheWildJarvi《THE SEMI SEER》#1337: but still, they math units arent always going to output a square
+TheWildJarvi《THE SEMI SEER》#1337: anything doing calculations only really outputs 1 x,y value per loop unless you parallelize it
+BitorBit#6268: i can letrly draw 50 squares in 4 tick
+TheWildJarvi《THE SEMI SEER》#1337: okay for instance, bresenhams line drawing algo only outputs one x,y coord per loop
+BitorBit#6268: but mine(new one) can do it in 2 ticks
+TheWildJarvi《THE SEMI SEER》#1337: pixel by pixel
+TheWildJarvi《THE SEMI SEER》#1337: thats how real rendering works
+BitorBit#6268: for 64x64
+TheWildJarvi《THE SEMI SEER》#1337: yup
+BitorBit#6268: time to draw all pixels on screen (20,480 TICKS)
+BitorBit#6268: this is x,y
+BitorBit#6268: here
+TheWildJarvi《THE SEMI SEER》#1337: but using x,y addressing is how all math is done for displaying on a screen usually
+TheWildJarvi《THE SEMI SEER》#1337: for a general purpose display
+TheWildJarvi《THE SEMI SEER》#1337: and decide which one you want to use on what usecase
+TheWildJarvi《THE SEMI SEER》#1337: you can use all 3
+BitorBit#6268: that is too slow
+TheWildJarvi《THE SEMI SEER》#1337: bitmap, what you have, what you have + decoder
+TheWildJarvi《THE SEMI SEER》#1337: what im saying is you can have 3 different sets of inputs on the display
+TheWildJarvi《THE SEMI SEER》#1337: yours is just x,y addressed without the decoder so you can select several lines at once
+BitorBit#6268: its something similar to that, but uses row sequance
+TheWildJarvi《THE SEMI SEER》#1337: bitmap means accessing each pixel individually(useful for loading a bitmap rom image) <[newline]> and vector(x,y) means having decoders on your inputs
+TheWildJarvi《THE SEMI SEER》#1337: uhm not rn
+BitorBit#6268: can u join server?
+BitorBit#6268: ?
+TheWildJarvi《THE SEMI SEER》#1337: you have 3 different sets of inputs <[newline]> 1) bitmap <[newline]> 2)what you have now <[newline]> 3)vector(x,y based)
+BitorBit#6268: but if we dont go all lines at once, it would take 128 ticks
+BitorBit#6268: because it can draw multiple lines at once
+BitorBit#6268: if you have this 64x64 screen, to fully fill it it would take 2 tick
+BitorBit#6268: and to save pixels it takes one more tick
+BitorBit#6268: this is drawing 2˘N pixels in one tick
+BitorBit#6268: too slow
+TheWildJarvi《THE SEMI SEER》#1337: use a decoder on the x and y
+BitorBit#6268: so nobody is ansqering
+BitorBit#6268: does someone has idea to lower number of inputs on my display?
+BitorBit#6268: ey
+TheWildJarvi《THE SEMI SEER》#1337: its been a long time in the making, even the vector extensions arent ratified yet but(for example) nvidia implements their own version in their embedded processors on their gpus
+Erikbot#6368: I'm surprised that the bit manipulation extension isn't ratified yet.
+Erikbot#6368: I just spent half a day just reading the riscv isa.
+ThaCuber#5611: :disappear:
+BitorBit#6268: that is nothing
+drawcoco#9558: ratio of 1800, great
+JPM-Baroque Spaceship#6542: nope
+ThaCuber#5611: wait did spanish LW come out already?
+Ecconia#4929: Ahh thats still okay, lets go for more KBs
+ThaCuber#5611: xd
+JPM-Baroque Spaceship#6542: A
+JPM-Baroque Spaceship#6542: Imma see, I cant even place the second kb
+ThaCuber#5611: *how's that 2 kbs*
+ThaCuber#5611: xd
+Ecconia#4929: And how many Megabytes (is your save now)?
+JPM-Baroque Spaceship#6542: Two kilobytes
+JPM-Baroque Spaceship#6542: The kilobyte
+circuitgamer77#0377: I'm going to finish the syncing, linking, and vertical addressing tomorrow - I need to sleep :)
+circuitgamer77#0377: There's no syncing at all at the moment, but I'm intending it to be externally synced instead of internally to reduce component count.
+circuitgamer77#0377: It's auto-addressing, as usual.  There is a manual addressing version though.
+circuitgamer77#0377: 
+circuitgamer77#0377: Now with an 8 bit address (x only, not y) (add 2 bits - each address actually addresses a group of 4, but the 2 bit address component has to be handled a bit differently)
+circuitgamer77#0377: I want the addressing to be bit tileable so there isn't a max size.
+circuitgamer77#0377: Should be easily tileable to any size when I'm done.
+circuitgamer77#0377: I'm building it with 4x4 chunks to give me enough space for the components.
+circuitgamer77#0377: 
+circuitgamer77#0377: This is turning out to be a bit bigger than I thought - this is a 4x4 pixel chunk for a double buffer display, but without the global addressing component (that's next).  There are a lot of doubled wires because I can't fit them within the chunk, but they can be offloaded to a side board that needs to exist anyway.
+Erikbot#6368: working on a compacted cpu (everything that carries data is 32 wide so everything can be stacked and things don't need to be wired around) that will eventually be risc-v. the decoding wasn't as bad as I thought once I found a decent reference card. (it is a rendered image)
+TheWildJarvi《THE SEMI SEER》#1337: not implement exactly
+TheWildJarvi《THE SEMI SEER》#1337: the point is to learn from them
+TheWildJarvi《THE SEMI SEER》#1337: its a toy arch dude
+ThaCuber#5611: did you make it already or no one has made it?
+ThaCuber#5611: i don't know if i should've used that as an example
+ThaCuber#5611: for example, i did not know that alan turing was gay
+ThaCuber#5611: these series teached me a lot of things actually
+TheWildJarvi《THE SEMI SEER》#1337: https://cs.wellesley.edu/~cs240/s16/slides/datapath.pdf
+ThaCuber#5611: 🤔
+TheWildJarvi《THE SEMI SEER》#1337: you might be better off finding some professors slides on their own toy arch that has more documentation available lol
+TheWildJarvi《THE SEMI SEER》#1337: those are toy archs
+TheWildJarvi《THE SEMI SEER》#1337: hmm
+ThaCuber#5611: the one from the CrashCourse Computer Science series i guess
+ThaCuber#5611: actually, i'll start making a smaller pc first ngl
+Verlio_H#0201: oh wait I read that as program counter too
+TheWildJarvi《THE SEMI SEER》#1337: but when building digital logic hardware, PC usually means program counter lol
+TheWildJarvi《THE SEMI SEER》#1337: pc = personal computer
+ThaCuber#5611: A
+TheWildJarvi《THE SEMI SEER》#1337: i was joking haha
+ThaCuber#5611: oh
+ThaCuber#5611: wait
+ThaCuber#5611: no, computer
+TheWildJarvi《THE SEMI SEER》#1337: program counter?
+TheWildJarvi《THE SEMI SEER》#1337: pc?
+ThaCuber#5611: 😓
+ThaCuber#5611: wait, i just realized there will be some impossible stuff if i do it with 4
+ThaCuber#5611: there's a difference though, this pc will be 4 bits instead of 16, i don't really feel like making a 16 bit pc
+ThaCuber#5611: 
+Ecconia#4929: When you know, you messed up your decoder... 😅 <[newline]> (Luckily I can easily move all the inverters at the back. But got to do that like 8 times)
+Erikbot#6368: therefore, it could be significantly reduced once I am done with it.
+Erikbot#6368: It is essentially just a giant lookup table
+Erikbot#6368: It is an opcode decoder, the input is the opcode and the blue lights are from the mux to display the opcode for the row. each lever enables a certain control line for a specific opcode.
+MichaelBot#9291: What's going on here? The top is the instructions and you flip switches to active control lines for each one?
+Erikbot#6368: Those instructions probably wouldn't be emitted by a compiler anyways.
+gnog#2259: and i use csr instruction to draw on screen
+gnog#2259: only those non-weird
+gnog#2259: no
+Erikbot#6368: even the weird ones like fence?
+gnog#2259: or test it someway at all
+gnog#2259: basically i implemented everything and trying to get rid of some errors there
+Erikbot#6368: is the core finished or do you only have a subset of the instructions?
+TheWildJarvi《THE SEMI SEER》#1337: thats how i did it for my mc cpu lol
+gnog#2259: i put it in godbolt, got the assembly, and then put the assembly in some online assembler for risc v
+TheWildJarvi《THE SEMI SEER》#1337: its a riscV 32i core iirc
+Erikbot#6368: did you write your own compiler or was this manually compiled?
+TheWildJarvi《THE SEMI SEER》#1337: ayy thats very cool. great job
+gnog#2259: ```c <[newline]> #include <stdint.h> <[newline]>  <[newline]> inline void setpixel(uint8_t x, uint8_t y, uint8_t r, uint8_t g, uint8_t b) { <[newline]>     int rcolor = (r << 16) | (g << 8) | b; <[newline]>     __asm__("csrw 0, %0" : : "r"(rcolor));  <[newline]>     int rpos = (y << 8) | x; <[newline]>     __asm__("csrw 1, %0" : : "r"(rpos));  <[newline]> } <[newline]>  <[newline]> int main() { <[newline]>     for (int i = 0; i < 256; i++) { <[newline]>         setpixel(i, i, 255, 255, 255); <[newline]>     } <[newline]>      <[newline]>     for (int i = 0; i < 256; i++) { <[newline]>         setpixel(i, 255 - i, 255, 255, 255); <[newline]>     } <[newline]> } <[newline]> ```
+gnog#2259: executing some C code
+gnog#2259: 
+sparks#0687: I'd have to understand the gates again to do that 😄
+Erikbot#6368: I mean it is just a mux where its output is connected to some and gates with buttons (although modified to be 2 tick total)
+sparks#0687: I wish I had this instead of my unintelligible pile of gates lol
+IDoget#3748: shouldn't of said anything
+IDoget#3748: cause i was excited it would be the first time it was done
+IDoget#3748: it
+IDoget#3748: now i dont want to do
+ThePiGuy24#0369: i have somewhat planned it out in my head
+IDoget#3748: good luck. its a lot harder then i thought it would be
+IDoget#3748: should be 30 fps with sound, and mid res
+IDoget#3748: we are making a programmable song composer right now. I'm working on a frame counter. its going to work similar to yours but ill use equations on every frame
+ThePiGuy24#0369: *guess i know what im spending the next n hours on then*
+ThePiGuy24#0369: now i wanna make bad apple too ;p
+Erikbot#6368: manually?
+IDoget#3748: and move up to bad apple
+IDoget#3748: we are going to start with more simple animations
+IDoget#3748: just not on that screen
+IDoget#3748: im working on that with my friend right now
+Erikbot#6368: that might have been done before since there are tools to generate circuits.
+ThaCuber#5611: imagine programming bad apple on that thing
+Erikbot#6368: instructions are different types of bit shift, bitwise operations, add/sub and multiplication and misc. others
+Erikbot#6368: instruction decoder, I realized that I could eventually replace this with like 20 and gates, but it is nice to have it like this when developing.
+Erikbot#6368: software dot product is working. it is displaying `dot(x-32,y-32)%16`
+RyanT#1426: this channel
+JoshuaSpeedy#3545: it isnt there
+JoshuaSpeedy#3545: 
+Ecconia#4929: no u gate
+JoshuaSpeedy#3545: no gate
+Erikbot#6368: none gate
+Ecconia#4929: Be cursed.
+Erikbot#6368: nand gate
+ThePiGuy24#0369: try `x xor y`, produces a neat pattern ;p
+Erikbot#6368: made an error with the bit shift, this is the correct image
+Erikbot#6368: multiplier has been setup, showing (x*y/8)%16 on the screen
+BitorBit#6268: zoomed camera to hide my other builds what are private
+ThaCuber#5611: is that a private world? <[newline]> answer me in <#401255675264761868> pls
+nemerod#0256: custom background menu YAY
+nemerod#0256: you can add the result inside the folder he say in console then you can add the file on  <[newline]> ``` <[newline]> ...\Logic World\GameData\MHG\backgrounds\ <[newline]> ```
+nemerod#0256: if you want made 360 screenshot, enter the command in consol <[newline]> ``` <[newline]> screenshot360 <[newline]> ```
+TheWildJarvi《THE SEMI SEER》#1337: this is absolutely cursed
+nemerod#0256: 
+ThaCuber#5611: that's why i want the orthographic cam, looks so weird but also normal
+nemerod#0256: total not same 🙂
+nemerod#0256: 
+ThaCuber#5611: epic, thanks
+nemerod#0256: <@!595039976509538381>
+nemerod#0256: enter the command <[newline]> ``` <[newline]> SetCameraOrthographic true <[newline]> ``` <[newline]> for enable and tack your screen <[newline]> ``` <[newline]> SetCameraOrthographic false <[newline]> ``` <[newline]> for return to normal mode 🙂
+ThaCuber#5611: which 👀
+nemerod#0256: it's commande in console
+ThaCuber#5611: is your camera projection orthographic or something?
+PillburyDohBoy2#0651: its impossible with that additude, yes
+IDoget#3748: this is actually impossible. you need a 88 long circuit board to even have that many inputs
+BitorBit#6268: if you want i can even compact something else
+BitorBit#6268: you want it?
+BitorBit#6268: yes
+gl0ck#6489: is there half adder components?
+gl0ck#6489: huh
+gl0ck#6489: that compact?
+BitorBit#6268: its full adder
+gl0ck#6489: looks like one
+gl0ck#6489: half adder?
+BitorBit#6268: i can add adder next to an adder
+BitorBit#6268: i cant
+BitorBit#6268: nah
+GHXX#9078: 128bit cpu in 3x3x3 space please ty
+nemerod#0256: make video please
+GHXX#9078: but can you make this a 128bit adder while keeping the size the same
+BitorBit#6268: full expandable adder xd
+BitorBit#6268: full carry
+BitorBit#6268: its instant carry
+GHXX#9078: with all the carrys
+nemerod#0256: with instant carry ?
+BitorBit#6268: its totaly 4 blocks wide
+BitorBit#6268: fuctional adder
+BitorBit#6268: yes xd
+GHXX#9078: when you order a dlatch on wish
+BitorBit#6268: xd
+BitorBit#6268: the 2 tick clock
+BitorBit#6268: and/and/d latch
+GHXX#9078: cpu capable of doing basic addition
+RyanT#1426: CPU capable of running x86 OSes
+BitorBit#6268: the half block delayer
+circuitgamer77#0377: I love this conversation :)
+BitorBit#6268: i have something more cursed
+Erikbot#6368: bidirectional fast buffer
+Erikbot#6368: single write infinite read ram
+CrispyPin#1149: <@!121786044197765131> is this multicore or multiprocessor?
+GHXX#9078: <:amogus:811751280342597642>
+Limón#7879: infinite
+CrispyPin#1149: woah, what tick rate can it handle?
+Erikbot#6368: 0 bit pipelined infinite core computer
+CrispyPin#1149: yeah we need to design arrays of them and logic for switching between them tho
+Limón#7879: I think we should all switch to 1 bit ram
+CrispyPin#1149: its quite fast, 1 tick write, 0 tick read
+Erikbot#6368: it stores 1 bit and has a 0 bit address.
+Limón#7879: shouldn't a 1 bit address be 2 dlatches?
+Erikbot#6368: yes, it is 1 bit
+Limón#7879: only has 1 address <:raised_eyebrow:872757262802878494>
+RyanT#1426: r/technicallythetruth
+Erikbot#6368: 1 bit ram
+GHXX#9078: this one does 0 to 16 additions, depending on how many bits are set in the multiplier
+GHXX#9078: WIP 2x16bit in, 16bit out multiplier (should actually easily be extendable to 2xN bit in, n bit out
+Limón#7879: 27nm
+TheWildJarvi《THE SEMI SEER》#1337: its on 6nm or something, not 14nm++++++++++++++++++++++++++
+IDoget#3748: going to need a nuclear reactors power supply to power it
+TheWildJarvi《THE SEMI SEER》#1337: <a:KEKWgif:829851650717909094>
+TheWildJarvi《THE SEMI SEER》#1337: its amd not intel
+IDoget#3748: power draw of 700 watts
+IDoget#3748: just what i need
+IDoget#3748: 96 cores
+IDoget#3748: oh yes.
+Limón#7879: yeah that is what I mean
+TheWildJarvi《THE SEMI SEER》#1337: looks like next gen epyc gets 512, https://www.tomshardware.com/news/zen4-madness-amd-epyc-genoa-with-96-cores-12-channel-ddr5-memory-and-avx-512
+TheWildJarvi《THE SEMI SEER》#1337: i could be wrong, i said iirc
+IDoget#3748: hmm
+TheWildJarvi《THE SEMI SEER》#1337: avx 2 is the second revision to avx bringing it from 256 to 512 bits iirc
+IDoget#3748: just not AVX 512
+IDoget#3748: oh yea they have AVX 2
+PseudoGoose#2841: int _literals_ default to i32 if the compiler can't infer a different int type
+TheWildJarvi《THE SEMI SEER》#1337: depends on the line up. look at epyc
+IDoget#3748: 
+Limón#7879: they default to i32 (signed 32 bit integer)
+IDoget#3748: so AMD Cpu's dont have AVX
+PseudoGoose#2841: `u32`
+PseudoGoose#2841: you specify the width in the type name
+PseudoGoose#2841: no, there is no `int` type
+Erikbot#6368: so ints default to 128 bits or is it just a possible option?
+TheWildJarvi《THE SEMI SEER》#1337: no its dedicated hardware
+IDoget#3748: oh wow
+TheWildJarvi《THE SEMI SEER》#1337: they can be resturctured into other sizes as well
+TheWildJarvi《THE SEMI SEER》#1337: its several registers stacked into 1 larger more useable one
+Limón#7879: very nice when you need them
+Limón#7879: rust have 128bit types by default
+IDoget#3748: doesn't it do it by just running multiple on 1 lower bit computer in sequence. and storing in multiple memory words
+Erikbot#6368: isn't that several values packed inside a single register?
+TheWildJarvi《THE SEMI SEER》#1337: AVX 512 allows for 512bit operations
+Erikbot#6368: 128 bit could have some legitimate uses in scientific computing though.
+IDoget#3748: with AVX it does
+Limón#7879: cpu speed != bits
+IDoget#3748: isn't that slow as hell
+TheWildJarvi《THE SEMI SEER》#1337: https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
+IDoget#3748: if i dont want it to take years
+Erikbot#6368: nasa only uses 3.141592653589793 for pi
+IDoget#3748: im sure they coudl do some sort of space shit
+TheWildJarvi《THE SEMI SEER》#1337: Idoget, the cpu doesnt need to be a 1024bit cpu, to work on 1024 bit values
+IDoget#3748: ALSO IMAGINE THE FIBINACHI SEQUENCE!!!
+Limón#7879: nothing
+Erikbot#6368: even in scientific computing, at some point you have so much accuracy that it makes absolutely no diffrense.
+IDoget#3748: you know what NASA could do with that precise calculations?
+TheWildJarvi《THE SEMI SEER》#1337: yeah nothing above 64bit addressing space is needed. for data more than 64 bits AVX instructions exist
+IDoget#3748: dude
+Limón#7879: no real use for them, unless I am missing something...
+IDoget#3748: let alone operating systems for that many bits
+IDoget#3748: i dont even think 1024 bit computers have been made
+Erikbot#6368: 2049
+IDoget#3748: computers do too
+Limón#7879: my brain stops working after 2048
+Erikbot#6368: store the entire ram in a single register and operate on that.
+IDoget#3748: 2048
+IDoget#3748: 1024
+IDoget#3748: FUCL
+Limón#7879: ~~512 you mean~~
+IDoget#3748: nah
+IDoget#3748: or 512
+IDoget#3748: at that point just make a 256
+IDoget#3748: dude 🤣
+Verlio_H#0201: in metric tons
+Erikbot#6368: thank
+gnog#2259: lol
+Erikbot#6368: now laugh
+Erikbot#6368: mom
+Erikbot#6368: r
+Erikbot#6368: I can finally store the size of y-you
+BitorBit#6268: max number is 1427247692705959881058285969449495136382746624
+GHXX#9078: ~~4.5 letters per word~~
+BitorBit#6268: per tick?
+BitorBit#6268: ~18 letters
+BitorBit#6268: 150bit
+PseudoGoose#2841: no, just a 150 bit bus. Has 3 data words, instruction word, and control lines.
+Erikbot#6368: what am I looking at? is it a 150 bit cpu?
+nemerod#0256: approved 🙂
+PseudoGoose#2841: 150 bits of awesomeness
+PseudoGoose#2841: It's a little taller than the original shifter stages with diagonal wires, and it's a bit hard to see the shift amounts of each stage, but... Pretty right angles 🤤
+Ecconia#4929: Could be much smaller if I double the time. <[newline]> Or changing the decoder also works.
+Ecconia#4929: No longer work in progress. Here is a 128bit binary to decimal converter with 1 tick per bit.
+TheWildJarvi《THE SEMI SEER》#1337: nice
+Ecconia#4929: Sequential.
+TheWildJarvi《THE SEMI SEER》#1337: serial or combinational? :)
+IDoget#3748: after a few apex matches i will
+Ecconia#4929: Sadboy, this is all I finished within one hour earlier today. <[newline]> But now it is time to finish this 128 bit in 128 tick binary to decimal converter. <[newline]> Feel free to join me in voice chat.
+PseudoGoose#2841: now going down a rabbit hole redesigning the shifter stages to make those wires neater 😅
+PseudoGoose#2841: Collection of other parts, either old versions, or bus parts, or waiting to be integrated
+PseudoGoose#2841: Here is what it looks like currently. I had most of the control logic done (besides high-level instruction decoding) but I've been rearranging things, so the control is on the same side as data. <[newline]> I also just redesigned registers, haven't added them yet.
+nemerod#0256: have fun for control line for every block you made 🙂
+nemerod#0256: YAY 🙂
+PseudoGoose#2841: That is an old screenshot to be fair. I just had to find a picture of the old shifter, I didn't get one today before I deleted it. <[newline]> Since then I have moved some things around and am currently adding control lines.
+nemerod#0256: good luck anyway 🙂
+nemerod#0256: pain for you after 🙂
+nemerod#0256: i not see the Flag return and other line on the screen and several unite not connected for now too 😦
+nemerod#0256: bus A and B and R
+nemerod#0256: i see SFR area right from screenshot
+PseudoGoose#2841: Specifically RV32I right now
+PseudoGoose#2841: RISC-V
+nemerod#0256: you trying build ARM1 core ?
+PseudoGoose#2841: And then the reverse circuit will be on the output to flip it back
+PseudoGoose#2841: Basically integrated it into the input bus, and took two bits as input to each bit of the shifter
+PseudoGoose#2841: And the new part to replace those reversers:
+PseudoGoose#2841: the circuit on the left, next to the displays
+PseudoGoose#2841: 
+PseudoGoose#2841: You can see the old thing here:
+PseudoGoose#2841: Came up with a better design for my barrel shifter... I wasn't happy with the "wire density" of these bit reversers (all the wires converging in the middle), so I came up with an idea to make that look better
+BitorBit#6268: (not fully)but it is on paper upgraded
+BitorBit#6268: its upgraded
+BitorBit#6268: it can
+nemerod#0256: for small game, it's good, but with the minimum size program (and i know the minimum) and with dedicated logic, your arcade cant run tetris
+nemerod#0256: it's not for tetris and other stuff, crevette and me already start same thing on the server you build you screen 16x16 (8 color) with slow logic and small space meory code and ram <[newline]>  <[newline]> sorry man 😦
+TheWildJarvi《THE SEMI SEER》#1337: notice that AND is 1 bit multiplication
+TheWildJarvi《THE SEMI SEER》#1337: hence just ands & adders
+TheWildJarvi《THE SEMI SEER》#1337: so that grid is just AND gates to generate the half prducts, then you sum them using a tree
+TheWildJarvi《THE SEMI SEER》#1337: example
+TheWildJarvi《THE SEMI SEER》#1337: http://access.ee.ntu.edu.tw/course/VLSI_design_89second/course_outline/8.2.8%20Wallace%20Tree%20Multiplier%2005-31-2001.pdf
+TheWildJarvi《THE SEMI SEER》#1337: 
+BitorBit#6268: show me
+TheWildJarvi《THE SEMI SEER》#1337: adders, AND gates
+IDoget#3748: If no one gives you it. I'll make one when I get home in my sandbox
+BitorBit#6268: for multiplier and devider?
+BitorBit#6268: that helps the most
+BitorBit#6268: can you just send me top view of logic gates
+drawcoco#9558: I ll send you a diagram later if you want
+BitorBit#6268: ?
+drawcoco#9558: dividers are basically the opposite of it, you use substractors, if valus is negative, bit is 0. you cancel and do a shift to the divider <[newline]> and if result is positive you do it and shift the divider(lower it) and bit is a 1
+TheWildJarvi《THE SEMI SEER》#1337: 
+TheWildJarvi《THE SEMI SEER》#1337: 
+BitorBit#6268: give me
+TheWildJarvi《THE SEMI SEER》#1337: 4adder stages at 3ticks and then the and gate half product generation at 1 tick
+TheWildJarvi《THE SEMI SEER》#1337: My multiplier is 13 ticks for a 16*16mult
+BitorBit#6268: i cant go lower
+BitorBit#6268: 16tick min i need
+TheWildJarvi《THE SEMI SEER》#1337: this is the slow method, you can optimize it by doing your additions in parallel stages
+TheWildJarvi《THE SEMI SEER》#1337: ? did you see them lol
+IDoget#3748: and s0 - c is 5 bit
+IDoget#3748: s0 - s3 is 4 bit result
+IDoget#3748: a0 - a3 is second
+IDoget#3748: b0 to b-3 is first number
+IDoget#3748: oh they are just carry adders
+BitorBit#6268: similar to this schematic
+BitorBit#6268: here i see and gates and adders that i do not know what type are they
+BitorBit#6268: i need full view over the gates
+BitorBit#6268: that isnt my problem
+IDoget#3748: And put the sign through a xor
+IDoget#3748: Then do 3x3 bit
+IDoget#3748: If you need signed binary
+IDoget#3748: Well it works...
+BitorBit#6268: not that type of schematic
+IDoget#3748: Dividers hurt my brain so I can't help you with that. But  multiplication
+BitorBit#6268: same ad divider, i need those 2 so i can complete machine
+BitorBit#6268: yes, idk how its made
+IDoget#3748: 4 bit multiplication is just some and gates and 4 but adders
+IDoget#3748: Oh I could do that
+BitorBit#6268: the multiplication is 4 bit what i need
+IDoget#3748: Pretty sure multiplication is so big it would crash my world. And division would take years. Don't actually have a reason but imagine the fibinochi sequence.
+BitorBit#6268: divider
+BitorBit#6268: plz
+BitorBit#6268: yes
+TheWildJarvi《THE SEMI SEER》#1337: <#929800414549905499>  I have dividers on this if you wanna see them lol
+Erikbot#6368: sort of, but you need to **conditionally** subtract so that the number never becomes less than zero
+BitorBit#6268: like substractor from adder
+BitorBit#6268: so just negate inputs at the front
+Erikbot#6368: same but subtract, but only if the number does not become negative
+BitorBit#6268: now for division
+BitorBit#6268: nvm
+Erikbot#6368: I do not know what you are referring to, do you mean more wiki pages?
+BitorBit#6268: of that
+Erikbot#6368: more examples of what?
+BitorBit#6268: is there more other examples?
+Erikbot#6368: a = 1001, b = 0110 ```product =  <[newline]>  1001*0 <[newline]> +10010*1 <[newline]> +100100*1 <[newline]> +1001000*0 <[newline]> ```
+Erikbot#6368: well I built a 16 -> 32 multiplier, but it is faster to just redesign one for 4 bit. https://en.wikipedia.org/wiki/Binary_multiplier
+BitorBit#6268: do you have 4 bit divider and multiplier
+BitorBit#6268: tetris & stuff
+Erikbot#6368: also why would you need a divider for a 4 bit computer?
+Erikbot#6368: 4 bit would be 16 ticks
+BitorBit#6268: 32B ram
+BitorBit#6268: 128B storage
+BitorBit#6268: 4 bit
+BitorBit#6268: this arcade machine is running at 8 tick clock
+Erikbot#6368: in most cases it is easier to try and work around having to do division
+Erikbot#6368: a divider is absurdly slow, it takes about 4*(number of input bits)
+BitorBit#6268: i am working on this arcade machine, if someone has multiplier and divider
+Erikbot#6368: https://discord.com/channels/401255675264761866/401255675264761868/937761160269291590
+RyanT#1426: that exists?
+Erikbot#6368: Also you should probably use the mod that fixes collider creation performance, otherwise you might spend 30 min to open your world.
+Erikbot#6368: Any special operations like multiplication/division? Is there some reason you need that high precision?
+IDoget#3748: 128 bit cpu...
+EmergencyTemporalShift#0001: Yeah, from the scene I constructed earlier
+GHXX#9078: Nice, im assuming you just pressed 1 and 2 on your phone?
+EmergencyTemporalShift#0001: <@!109262887310065664>
+EmergencyTemporalShift#0001: https://youtu.be/0hFZ2pp5AYU
+EmergencyTemporalShift#0001: Fine, I'll upload it to youtube
+EmergencyTemporalShift#0001: 
+EmergencyTemporalShift#0001: Give me a sec
+EmergencyTemporalShift#0001: Wait, can we not play mkv native....
+EmergencyTemporalShift#0001: 
+EmergencyTemporalShift#0001: It isn't, I just don't understand node.js strangeness
+GHXX#9078: shouldn't be an issue on the tcp bridge side
+GHXX#9078: 🤔
+EmergencyTemporalShift#0001: I can get LW to output something, but not what I want
+GHXX#9078: <:vvThink:580599869639622657>
+EmergencyTemporalShift#0001: Tasker integration scene done:
+GHXX#9078: <a:CS_eyesshaking:717429589810610287>
+EmergencyTemporalShift#0001: I'm already receiving messages
+EmergencyTemporalShift#0001: <@!109262887310065664> I progressed with this much faster than I thought I would:
+binaryclock03#5762: not really, just need a fast gpu/graphics display device
+DjSapsan#4530: <@204460961686487040> u also need a fast CPU to load the screen
+binaryclock03#5762: sorry
+binaryclock03#5762: no, the answer is no
+BitorBit#6268: can you start a server?
+binaryclock03#5762: I would love the help but I don't have a dedicated machine running and I'm just loading up the world and doing a bit of progress between classes, so I'll have to turn down the help
+BitorBit#6268: i am good at that
+binaryclock03#5762: I'm thinking of just doing 4bit color and using the display as a CLT instead
+BitorBit#6268: can i help you
+binaryclock03#5762: around 1024 wires in parallel if I want it to be able to refresh once per 32 ticks
+binaryclock03#5762: Working on a 8 bit color screen (vanilla) and to get any sort of reasonable refresh speed is gunna take a lot of channels....
+blane1257#8086: i think they were talking about deciding against a read feature
+KyleRokuKyu#6975: So, I understand the concern for network bandwidth
+KyleRokuKyu#6975: But, yes, it would need a second array of pixels internally
+KyleRokuKyu#6975: More-so, what I'm saying is an internal double frame buffer with 1 extra peg that switches between what's rendered to the screen and what's functioning exactly as the screen currently functions (without rendering to the screen)
+Vinyl Boot Maven of Shade#1858: I'd like to have a backbuffer with read/write capability. But I decided against it because, I'd need output pegs, which wouldn't fit unless the minimum size was much higher, and I'd need a second array for the pixels that is not compressed, and I was already approaching undesirable lag from network traffic at 256x256 screens with random data. Maybe after some further lw updates that provide more control over what's actually sent to the client and stuff. But it would probably use serial communication so I could have one output peg to keep the minimum screen size low.
+TheWildJarvi《THE SEMI SEER》#1337: I agree, I asked <@!377717131556552708> to do this a while ago, but i would also like the ram to have a data output bus as well <[newline]> edit* the way it works in digital is the input address has 1 extra bit at the MSB to select which frame buffer is being written to or loaded from(cuz it acts like a ram component) and then there is a separate input to select which buffer to show on the screen.
+blane1257#8086: which is technically a bit better for speed but it means if you want to draw a raster one pixel at a time, you'll need to have some sort of intermediate buffer
+blane1257#8086: i made it so the 4 bits to each 2-pixel row are written at once, without really thinking about it
+blane1257#8086: oh ive just realized theres no way to write to a single pixel at a time,, hmmm, that kinda throws a screw in a few different approaches to rendering images
+blane1257#8086: now just to.. build something to drive this, lol
+blane1257#8086: decided to finally try making some display stuff.. came up with this 2x2 segment for a 2-bit color depth display with 2 in-built buffers
+KyleRokuKyu#6975: I'd really like if the HMM display had an input to flip between writing and reading from 2 different frame buffers.  Reading from the opposite it's writing to.  This would eliminate the screen tearing it gets between flood fill resets
+KyleRokuKyu#6975: It supports color, I just made the logo white because I... didn't think about colorizing it lol
+KyleRokuKyu#6975: I finally installed mods.  I really enjoy building it all vanilla but it's just... not performant lol <[newline]>  <[newline]> So, moved all the same concepts over to using the HMM display and Hex ROM (As RRGGBBAA, not using alpha yet but might make it additive rendering later) <[newline]>  <[newline]> So, of course, the first thing to do is make the DVD logo bounce around.
+KyleRokuKyu#6975: Currently have the bug where copy pasta thinks there's collisions so I can't finish the back end <[newline]>  <[newline]> But here's 12x12 of a 32x32, 64 color screen.  Each pixel is 2x2 all the way through to the color and coordinate inputs.  It stores the last color since update in a 6 bit array of SR latches <[newline]> Made a sprite handler so you can feed it a sprite plus x,y coordinates and it'll draw it in location.  The colors are additive so it's possible to draw overlapping sprites. <[newline]>  <[newline]> The sim rate is 100,000 <[newline]> (The gif is in real time) <[newline]>  <[newline]> The white "static noise" looking pixels are just which pixel it's currently working on.  This is because the screen is actually in negative color space.  It's a long story.  I don't feel like fixing it right now (5am) <[newline]>  <[newline]> Anyways, that's it for this Unit which Processes Graphics
+TheWildJarvi《THE SEMI SEER》#1337: i agree with blane here. Most early cpus that had a hardware stack were very limited in terms of their depth. using a software stack in ram allows for larger stack spaces <[newline]> edit* if the cpu arch has few registers a hardware stack may be more than sufficient
+ThePiGuy24#0369: hell, i can even do the "pop and overwrite" in one cycle if i add a small amount of extra logic
+ThePiGuy24#0369: which is faster than popping twice then pushing
+ThePiGuy24#0369: meaning what i can do to do math on the stack is read those two values, then pop once from the stack, then overwrite the the top value
+ThePiGuy24#0369: because i have also somewhat planned out an ALU design that works on the stack, and as an optimisation, i am putting 2 outputs on the stack, one for the top value, and one for the value below it
+ThePiGuy24#0369: that would require a lot more logic to implement, namely address decoding and a bus of some sort. it is much easier and faster to do this, plus this also has some advantages that i want
+MichaelBot#9291: Once you have RAM sure, but lots of early CPUs that didn't have random access used explicit stacks like this.  Even with ram, the original x86 floating point ops used a stack register like this.
+blane1257#8086: generally, because of the size and complexity of implementations like this, stacks are usually implemented in a more abstract manner, with a pointer which is incremented and decremented, while the actual data remains stationary
+ThePiGuy24#0369: this is essentially just 4 shift registers that can shift in either direction
+GHXX#9078: might be interesting to use a shift register for storing the stack
+EmergencyTemporalShift#0001: Wait is that thepiguy, inventor of pi?
+ThePiGuy24#0369: a pretty "meh" stack proof of concept. 4 bits wide, 4 nibbles long, easily expandable
+00asdf#7469: register block with set, increment, decrement and invert <[newline]> the first steps towards a 16bit cpu
+GHXX#9078: that was just during testing
+GHXX#9078: 😂
+TheWildJarvi《THE SEMI SEER》#1337: lmfao I just noticed it now
+Limón#7879: time must work differently where you live
+GHXX#9078: and some logic behind it
+GHXX#9078: it do be coming along nicely. currently working on a divider to convert my tick-counter to the time. Why do math when you can do logic <:donutmonster:832372082440273970>
+GHXX#9078: its probs gonna be days hours minutes seconds or something
+GHXX#9078: 
+GHXX#9078: thats in binary, lsb is ticking at 15Hz
+GHXX#9078: building a clock to visually see the time wasted debugging logic 😛
+circuitgamer77#0377: Big block o' logic.  Another ACU design (Arithmetic Comparison Unit).  3 ticks per operation, data synced but not control synced.  This is why I need two general busses and an ALU return bus :)
+circuitgamer77#0377: My CPU design now has 7 busses...  Hopefully I won't find a need for more!
+GHXX#9078: 16 bit multiplier (2x 16bit in, 32bit out) (WIP, but almost done)
+Lisa#4756: idk how long it is, I just want it to fit entirely within that prism
+Lisa#4756: trying to make a 7 segment display that fits behind a 7x5 square
+Lisa#4756: fat pegs are very useful
+Lisa#4756: 
+GHXX#9078: <a:aPES3_PetTheAmongUs:771029769197846578>
+⛄gravitowl⛄#0001: SUS MOMENT
+MoeKhaos#2187: Amongus in Logic world?
+Jimmy#8080: true
+Broyojo#2667: 
+Reese4221#8317: https://tenor.com/view/sushichaeng-among-us-among-us-meme-shocked-confused-gif-22454610
+Jimmy#8080: Among Us?
+nemerod#0256: resize and more color
+MoeKhaos#2187: <a:ROWOW:853744857691717642>
+nemerod#0256: i'm sorry for this message, but you know you can resize the indicator
+MoeKhaos#2187: Designed a pixel RGB screen, and I plan to implement this into the animation program once I design memory to store the color data
+blane1257#8086: well thats neat
+sybergoosejr#8256: I could modify the design slightly to allow for banking the whole 256 bytes and upping the possible memory size closer to the 64kb range. But I did not do it because then no one would want to join the server with the crazy load time it would take.
+sybergoosejr#8256: The address decode happens on the card on the left and makes x,y selection. 16x16
+sybergoosejr#8256: 2 tick decode and select 2 tick read/write
+sybergoosejr#8256: Here is my memory system. It uses an x,y coordinate decoder method. Whole 256bytes with about 4tick access https://cdn.discordapp.com/attachments/901195561980543007/925532722070454272/2021-12-2818-35-54_3840x2160.jpg
+blane1257#8086: i decided a few days ago to make a circuit to model the functionality of a comptometer, an early and simple but deceptively versatile mechanical adding machine <[newline]>  <[newline]> messed around for a couple days with BCD, giving myself many headaches.. just now had the thought of abandoning binary entirely and working entirely in decimal, and god damnit, its way smaller, probably faster, so much simpler, and way closer to the way the actual machine works <[newline]>  <[newline]> 2 digit prototype thrown together in like 10 minutes
+circuitgamer77#0377: Addressing and flood control segment (fully modular) done!
+HuntaBadday#3556: I usually just make a decoder
+circuitgamer77#0377: If you look earlier in this chat, you can see what the non-modular version looks like.  It's a lot smaller...
+HuntaBadday#3556: Nice
+circuitgamer77#0377: The actual memory is all on the right, every other slice is just addressing for the byte addressable part.
+HuntaBadday#3556: I understand
+HuntaBadday#3556: Ah
+circuitgamer77#0377: The register component of a RAM system, not registers for a CPU
+HuntaBadday#3556: Damn
+HuntaBadday#3556: How many registers do you need
+circuitgamer77#0377: Much, much bigger.
+circuitgamer77#0377: <@!121786044197765131> Here's the register component redone to be modular.  I haven't made the control logic yet, but that's next.
+MoeKhaos#2187: It is now far more modular than before, this is the current 4 frame version
+TheWildJarvi《THE SEMI SEER》#1337: i see no reason why it cant be that fast doing it in banks tho
+circuitgamer77#0377: Which is why I started making this in the first place.
+circuitgamer77#0377: But it's faster
+TheWildJarvi《THE SEMI SEER》#1337: the other thing is its pretty inefficient having an adder at each address. rather than a single adder needed for all of them
+circuitgamer77#0377: The addressing works the same way for other sizes, you just add a few more.
+circuitgamer77#0377: no
+circuitgamer77#0377: The same logic can be extended without any changes for other sizes
+TheWildJarvi《THE SEMI SEER》#1337: no man, you have to stick banks inbetween your banks then re-address it all
+circuitgamer77#0377: or to make the address longer just add a few more xors per layer.  Modular, just not disconnected modular at the moment
+TheWildJarvi《THE SEMI SEER》#1337: idk how you fail to see this
+circuitgamer77#0377: To make this 8 bytes per address, just add 4 more layers per register and add a bunch of relays.
+TheWildJarvi《THE SEMI SEER》#1337: yeah so my point still stands, its not modualr for more bits of addressing
+circuitgamer77#0377: rewire, not redesign.  The current design works for 32 bit data and 8 bit addressing, but could be expanded for other sizes.  Not modular in terms of how it can stack, but the system is modular in terms of the pieces.  I just have them wired directly with this version rather than seperated.  It would not be very difficult to rewire for full modularity, and I'm going to do that soon.
+TheWildJarvi《THE SEMI SEER》#1337: see the issue?
+TheWildJarvi《THE SEMI SEER》#1337: its not modular
+circuitgamer77#0377: The byte at address 5 is part of the word at 2, 3, 4, and 5
+TheWildJarvi《THE SEMI SEER》#1337: you cant add more address bits to it
+TheWildJarvi《THE SEMI SEER》#1337: now how do you expand each bank idividually without rewiring the whole thing?
+TheWildJarvi《THE SEMI SEER》#1337: right
+circuitgamer77#0377: The word at address 3 is bytes 3, 4, 5, and 6, and the word at address 4 is 4, 5, 6, and 7, and the word at address 5 is bytes 5, 6, 7, and 8.
+circuitgamer77#0377: Continuing:
+circuitgamer77#0377: That's what I'm doing, just in a different way that can be optimised further for speed
+TheWildJarvi《THE SEMI SEER》#1337: okayu so regardless of alignment it gets 4 bytes
+circuitgamer77#0377: And that's correct.
+TheWildJarvi《THE SEMI SEER》#1337: ``` <[newline]> addr | value <[newline]> _____________ <[newline]> 0 | aa <[newline]> 1 | bb <[newline]> 2 | cc <[newline]> 3 | dd <[newline]> 4 | ee <[newline]> 5 | ff <[newline]> ``` <[newline]>  <[newline]> load a word from address 1 and you get ```0x ee dd cc bb```
+circuitgamer77#0377: That's byte 2, 3, 4, and 5
+circuitgamer77#0377: For example, the word at address 2
+circuitgamer77#0377: Each word is made of 4 bytes, which can be aligned in any way in memory.  There are 4 addresses that each byte can be a part of
+TheWildJarvi《THE SEMI SEER》#1337: no matter how its aligned a word is a 32bit value (in this example) and requires 4 addresses
+TheWildJarvi《THE SEMI SEER》#1337: regardless of alignement
+TheWildJarvi《THE SEMI SEER》#1337: each word is 4 possible bytes
+circuitgamer77#0377: That's referring to alignment
+TheWildJarvi《THE SEMI SEER》#1337: but go on
+TheWildJarvi《THE SEMI SEER》#1337: no 4 possible bytes
+circuitgamer77#0377: Therefore each byte is a component of 4 possible words
+TheWildJarvi《THE SEMI SEER》#1337: you load 4, 8 bit addresses
+TheWildJarvi《THE SEMI SEER》#1337: you dont load 1, 32bit address
+TheWildJarvi《THE SEMI SEER》#1337: right
+TheWildJarvi《THE SEMI SEER》#1337: or 4 inparallel for a 32 bit word
+circuitgamer77#0377: 32 bits is 4 bytes
+TheWildJarvi《THE SEMI SEER》#1337: you need to lead 2 addresses inparallel to load a 16 bit word
+circuitgamer77#0377: Ok, let's try this
+TheWildJarvi《THE SEMI SEER》#1337: an address can only refer to 1 byte in byte addr ram
+circuitgamer77#0377: YES
+TheWildJarvi《THE SEMI SEER》#1337: an adress can only correspond to a byte
+TheWildJarvi《THE SEMI SEER》#1337: you just said this
+circuitgamer77#0377: It can be!
+circuitgamer77#0377: There is no wasted memory
+TheWildJarvi《THE SEMI SEER》#1337: each address shoould only referenced a single BYTE
+circuitgamer77#0377: I'm definitely implementing it differently, but I think it's just as "correct" as any other design.  This design is just made differently than you expected.
+TheWildJarvi《THE SEMI SEER》#1337: thats the issue
+circuitgamer77#0377: Each address refers to several bytes in memory, through 4 separate busses through the registers.
+TheWildJarvi《THE SEMI SEER》#1337: yah i still think youre not quite implementing it correctly. each bank should be its own addressing. then combining banks to make anysize dataword.
+circuitgamer77#0377: no
+TheWildJarvi《THE SEMI SEER》#1337: its holding redundant bits?
+circuitgamer77#0377: no
+TheWildJarvi《THE SEMI SEER》#1337: so you need 4x as much memory?
+circuitgamer77#0377: The thing that would need to be modular for this layout to make it able to be any number of bytes in the output is the vertical dimension, not reorganizing front to back.
+circuitgamer77#0377: I'll try to explain...
+circuitgamer77#0377: Oh, I think I see the confusion - my memory is organized more like (a0, -, -, -) (a1, a0, -, -) (a2, a1, a0, -) (a3, a2, a1, a0) (a4, a3, a2, a1) and so on.
+TheWildJarvi《THE SEMI SEER》#1337: thoe whole point of byte addressable memory is you have banks of 8 bits at a time and can then make any sized words from it
+nemerod#0256: your memory used row column and layer ?
+circuitgamer77#0377: I think the way I had to lay this out to make it fast means it isn't quite what you're thinking, but I can achieve the same result (I think).  Not quite banks, but modular interaction with the bank.
+TheWildJarvi《THE SEMI SEER》#1337: this way its very modular to expand and then to create other byte sized memory topolgies from your base memory of a0 thru an
+TheWildJarvi《THE SEMI SEER》#1337: then you can expand those banks to theoretically 2^n bytes
+TheWildJarvi《THE SEMI SEER》#1337: then the one next to it is the b's , then c's, etc
+TheWildJarvi《THE SEMI SEER》#1337: so your current bank is a0 , a1, a2 .... an
+TheWildJarvi《THE SEMI SEER》#1337: basically have 4 banks of what you have now
+TheWildJarvi《THE SEMI SEER》#1337: yeah youre close
+circuitgamer77#0377: So the major change is make the number of bytes modular?  I think I can tweak this to be modular boards...  Let's see :)
+TheWildJarvi《THE SEMI SEER》#1337: whereas yours are linear:
+TheWildJarvi《THE SEMI SEER》#1337: see how each RAM is only holding 8 bits, but each ram has 16 bit addresses?  <[newline]> if you build just the single byte ram, you can then choose to make any sized byte addressable memory. whereas with your method, they are all linear in a single bank, instead of 4 banks in parallel. its hard to explain via text
+circuitgamer77#0377: Nevermind, I don't fully understand.
+circuitgamer77#0377: I think I understand, and I think that's a pretty easy change.  I'll try it in a bit :)
+TheWildJarvi《THE SEMI SEER》#1337: nah youre doing it per address, not per bank of addresses
+circuitgamer77#0377: yes
+circuitgamer77#0377: Can you clarify?  I think that's how I made this.
+TheWildJarvi《THE SEMI SEER》#1337: then you can easily arrange it for other byte addressable memories like 16 bit or 64 bit
+TheWildJarvi《THE SEMI SEER》#1337: niuce, but for more modularity, build a large array of 8 bit memory. say 256 bytes, then use 4 of those in parallel.
+Reese4221#8317: is it just like a adder setup that adds 1 to the value of the previous module?
+Reese4221#8317: how do you make stuff auto-addressable?
+circuitgamer77#0377: I made them auto-addressable:
+circuitgamer77#0377: Fixed and tested!
+circuitgamer77#0377: Fixed, now testing again :)
+circuitgamer77#0377: It's nothing too bad - I forgot to add the relay that disables writing when the high byte is not selected.  Easy enough to add, I just need to find the space.
+TheWildJarvi《THE SEMI SEER》#1337: i had a feeling there might be some missing logic haha
+circuitgamer77#0377: Also made a second error that is harder to fix, but I know how.
+circuitgamer77#0377: I made an error, but it's super easy to fix, one moment...
+TheWildJarvi《THE SEMI SEER》#1337: IN LITTLE ENDIAN <[newline]> imagine memory is like this <[newline]> ``` <[newline]> addr | value <[newline]> _____________ <[newline]> 0 | aa <[newline]> 1 | bb <[newline]> 2 | cc <[newline]> 3 | dd <[newline]> 4 | ee <[newline]> 5 | ff <[newline]> ``` <[newline]> if I load word, from addr 0, then its loads ```0xdd cc bb aa``` <[newline]> if i load byte from addr 1 then it loads ```0x00 00 00 bb``` <[newline]> if i load byte SIGNED from addr5 it loads ```0xff ff ff ff```
+circuitgamer77#0377: This is the control chip, but the thing that makes it work is in the registers:
+TheWildJarvi《THE SEMI SEER》#1337: okay so ill give you some example data to test with
+circuitgamer77#0377: Could be two, but it's bigger
+circuitgamer77#0377: One bus
+circuitgamer77#0377: Same as the input, but with a control for preventing signed logic from triggering on write.
+TheWildJarvi《THE SEMI SEER》#1337: wheres the output logic?
+circuitgamer77#0377: Yes, I have those.
+TheWildJarvi《THE SEMI SEER》#1337: store word
+TheWildJarvi《THE SEMI SEER》#1337: store half
+TheWildJarvi《THE SEMI SEER》#1337: store byte
+TheWildJarvi《THE SEMI SEER》#1337: load word
+TheWildJarvi《THE SEMI SEER》#1337: load half unsigned
+TheWildJarvi《THE SEMI SEER》#1337: load half
+TheWildJarvi《THE SEMI SEER》#1337: load byte unsigned
+TheWildJarvi《THE SEMI SEER》#1337: load byte
+circuitgamer77#0377: (I don't know the acronyms, could you spell them out?)
+TheWildJarvi《THE SEMI SEER》#1337: only on the loads
+TheWildJarvi《THE SEMI SEER》#1337: because it does not need signing on the input
+TheWildJarvi《THE SEMI SEER》#1337: so you have all the lgic for lb/lbu/lh/lhu/lw sb/sh/sw?
+circuitgamer77#0377: 32
+TheWildJarvi《THE SEMI SEER》#1337: looks like 32 on the input
+TheWildJarvi《THE SEMI SEER》#1337: is this for 16 bit or 32bit data words
+circuitgamer77#0377: (includes signed/unsigned btw - I was debating whether or not to do it, but it ended up being pretty easy)
+circuitgamer77#0377: I realized I made an error - the control logic was 1 tick slower.  I fixed it now though.  Just need to redo the registers now :)
+TheWildJarvi《THE SEMI SEER》#1337: nice!
+circuitgamer77#0377: <@!121786044197765131> This is a 1 tick slower version of the memory that I said I can make, but the control logic is 2 ticks read and 3 ticks write (which is the fastest I could get memory with the other design), and the only reason it's 1 tick slower is because I just made the other kind of RAM registers.  I'm about to make the other version that takes 2 ticks read and 3 ticks write, like the other design.  (also not synced yet - that's last).
+MoeKhaos#2187: 
+MoeKhaos#2187: and if it's modular enough, it could be unlimited frames/display size
+MoeKhaos#2187: This is leading to the potential of making a computer programed to animate as well
+TheWildJarvi《THE SEMI SEER》#1337: this is why im working on a render thing haha, i dont wanna store precomputed frames
+MoeKhaos#2187: I'm considering figuring out how to scale to 24 frames efficiently or even higher 😅
+MoeKhaos#2187: the plan is to scale up to 8 if this works
+MoeKhaos#2187: Back down to 4 frames per second
+MoeKhaos#2187: The actual 8 frames of animation are looking a lot more intimidating now once I placed the memory down
+MoeKhaos#2187: With integrated frame selection
+MoeKhaos#2187: The compact memory drive setup
+MoeKhaos#2187: I can't tell what it's supposed to be doing but I assume it works so <a:thumbs_up:679539525013209108>
+HuntaBadday#3556: First full test of my internet system
+HuntaBadday#3556: The rounding errors can't be as bad as lw, right?
+Saltypretzel#0321: h
+RyanT#1426: idk
+sybergoosejr#8256: whats the tick delay on that from input to done?
+sybergoosejr#8256: beauty
+RyanT#1426: 
+sybergoosejr#8256: lets see!
+RyanT#1426: ofc theres some floating point rounding error, but it works!!!
+RyanT#1426: 
+RyanT#1426: 
+sybergoosejr#8256: should be close to 01000011000111010110100011110110
+sybergoosejr#8256: ah
+RyanT#1426: just converting the output to decimal
+RyanT#1426: already typed it in lol
+sybergoosejr#8256: 01000000001011001100110011001101 * 01000010011010010011001100110011 if it helps
+RyanT#1426: ok
+sybergoosejr#8256: do 2.7 * 58.3
+RyanT#1426: shown here doing 3x3
+RyanT#1426: Here is my WIP single precision floating point multiplier. It should work for any multiplcations with normal results (not subnormal, infinity, or NaN)
+sybergoosejr#8256: what you see is the decoder and sequencer. so each card has the decoder to check the settings on the card matches the bus/flag conditions. if the test passes the next clock input will trigger the rom contents to play back and operate the control lines. i went with this design to keep the wide options avalable for the end user and their cpu design with aiy. it is built around with the idea of a 20t clock cycle but longer and shorter should be posible with these cards. i think you can even do more of a dynamic clock setup by linking an output to the clock input line. just need a first trigger.
+TheWildJarvi《THE SEMI SEER》#1337: 
+TheWildJarvi《THE SEMI SEER》#1337: heres my CPU parts thats a WIP. My instruction deocder is the unit in the bottom left
+PseudoGoose#2841: (also i haven't built it yet)
+PseudoGoose#2841: so idk
+PseudoGoose#2841: but flat
+PseudoGoose#2841: ehhh it might be about the same 2D footprint, maybe a bit larger
+PseudoGoose#2841: just wait until you see mine <:sunglasses_in_tears:893979138896044092>
+TheWildJarvi《THE SEMI SEER》#1337: thats a mighty large instruction decoder
+sybergoosejr#8256: and if i go with the gpu/display should i do it as memory maped i/o or give the cpu another register and treat it more like a 2nd bank of ram that the CPU can explicitly access separately from ram. or even a 3rd option of some how making both possible for an end user that is using AIY to build a cpu and they can pick.
+sybergoosejr#8256: so here is what all the instructions i made for my cpu look like so far. debating if i should make more functions or start work on making some rudimentary gpu/display.
+sybergoosejr#8256: mighty fine cpu there
+Jimmy#8080: Here's a CPU I just started
+Jimmy#8080: Welcome to our newest channel, <#930935059886784532> ! This is intended to be a more relaxed version of <#901195561980543007> , where folks can share and chat about the projects they're working on.
+Jimmy#8080: FIRST
