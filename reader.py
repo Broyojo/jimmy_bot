@@ -1,6 +1,7 @@
 import collections
 from itertools import islice
-
+import nltk
+import string
 
 CHANNELS = [
     ("logic-world", 401255675264761868),
@@ -31,31 +32,52 @@ def sliding_window(iterable, n):
 
 
 def main():
-    frequencies = {}
+    text = ""
     for (name, _) in CHANNELS:
         with open(f"data/{name}.txt", "r") as f:
             lines = f.readlines()
             for line in lines:
                 if line.startswith("Jimmy#8080:"):
-                    sentence = line.replace(" <[newline]> ", "\n").replace(
-                        "Jimmy#8080:", "").lower().split()
-                    for chunk_size in range(1, 11):
-                        for chunk in sliding_window(sentence, chunk_size):
-                            s = ""
-                            for word in chunk:
-                                s += word + " "
-                            chunk = s.strip()
-                            if chunk not in frequencies:
-                                frequencies[chunk] = 1
-                            else:
-                                frequencies[chunk] += 1
+                    sentence = line.replace(" <[newline]> ", " ").replace(
+                        "Jimmy#8080:", "").lower().strip()
+                    for character in string.punctuation:
+                        sentence = sentence.replace(character, "")
+                    sentence = ''.join(
+                        [i for i in sentence if not i.isdigit()])
+                    text += sentence + " "
 
-    with open("jimmy-frequencies.txt", "a+") as f:
-        sorted_freqs = {k: frequencies[k]
-                        for k in sorted(frequencies, key=frequencies.get)}
+    tokens = nltk.wordpunct_tokenize(text)
 
-        for (k, v) in sorted_freqs.items().__reversed__():
-            f.write(f"{k}: {v}\n")
+    bigram_measures = nltk.collocations.BigramAssocMeasures()
+    finder = nltk.BigramCollocationFinder.from_words(tokens)
+    scored = finder.score_ngrams(bigram_measures.raw_freq)
+    bigrams = sorted(bigram for bigram, score in scored)
+
+    with open("jimmy-bigrams.txt", "a+") as f:
+        for (a, b) in bigrams:
+            f.write(f"{a} {b}\n")
+
+    trigram_measures = nltk.collocations.TrigramAssocMeasures()
+    finder = nltk.TrigramCollocationFinder.from_words(tokens)
+    scored = finder.score_ngrams(trigram_measures.raw_freq)
+    trigrams = sorted(trigram for trigram, score in scored)
+
+    with open("jimmy-trigrams.txt", "a+") as f:
+        for (a, b, c) in trigrams:
+            f.write(f"{a} {b} {c}\n")
+
+    # words = nltk.word_tokenize(text)
+    # bigrams = nltk.bigrams(words)
+    # trigrams = nltk.trigrams(words)
+
+    # print([i for i in bigrams])
+
+    # with open("jimmy-frequencies.txt", "a+") as f:
+    #     sorted_freqs = {k: frequencies[k]
+    #                     for k in sorted(frequencies, key=frequencies.get)}
+
+    #     for (k, v) in sorted_freqs.items().__reversed__():
+    #         f.write(f"{k}: {v}\n")
 
 
 if __name__ == "__main__":
